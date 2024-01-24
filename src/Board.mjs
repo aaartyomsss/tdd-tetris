@@ -8,6 +8,11 @@ export class Board {
   }
 
   toString() {
-    return "TODO";
+    let result = ''
+    for (let i = 0; i < this.height; i++){
+      const row = `.`.repeat(3).concat('\n')
+      result += row
+    }
+    return result
   }
 }
