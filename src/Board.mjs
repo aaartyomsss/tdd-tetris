@@ -19,6 +19,16 @@ export class Board {
     this.boardMatrix[0][middleColumn] = element
   }
 
+  tick() {
+    for (let i = 0; i < this.height; i++) {
+      const col = this.boardMatrix[i].indexOf(this.fallingElement)
+      if (col === -1) continue
+      this.boardMatrix[i][col] = '.'
+      this.boardMatrix[i + 1][col] = this.fallingElement
+      break
+    }
+  }
+
   toString() {
     let result = ''
     for (let i = 0; i < this.boardMatrix.length; i++){
