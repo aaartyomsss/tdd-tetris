@@ -13,6 +13,10 @@ export class Board {
     }
   }
 
+  hasFalling() {
+    return !!this.fallingElement 
+  }
+
   drop(element) {
     if (this.fallingElement) {
       throw new Error("already falling")
