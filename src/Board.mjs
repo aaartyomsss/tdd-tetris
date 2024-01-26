@@ -12,6 +12,11 @@ export class Board {
     }
   }
 
+  drop(element) {
+    const middleColumn = Math.floor(this.width / 2)
+    this.boardMatrix[0][middleColumn] = element
+  }
+
   toString() {
     let result = ''
     for (let i = 0; i < this.boardMatrix.length; i++){
