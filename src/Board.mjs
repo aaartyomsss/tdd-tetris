@@ -14,6 +14,9 @@ export class Board {
   }
 
   drop(element) {
+    if (this.fallingElement) {
+      throw new Error("already falling")
+    }
     this.fallingElement = element
     const middleColumn = Math.floor(this.width / 2)
     this.boardMatrix[0][middleColumn] = element
