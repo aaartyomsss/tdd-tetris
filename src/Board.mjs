@@ -2,6 +2,7 @@ export class Board {
   width;
   height;
   boardMatrix = [];
+  fallingElement;
 
   constructor(width, height) {
     this.width = width;
@@ -13,6 +14,7 @@ export class Board {
   }
 
   drop(element) {
+    this.fallingElement = element
     const middleColumn = Math.floor(this.width / 2)
     this.boardMatrix[0][middleColumn] = element
   }
