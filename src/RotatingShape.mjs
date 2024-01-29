@@ -24,6 +24,16 @@ export class RotatingShape {
         }
         return new RotatingShape(a.map(row => row.join('')).join('\n'))
     }
+    rotateLeft() {
+        for (let i = 0; i < parseInt(this.height / 2); i++) {
+            for (let j = i; j < this.height - i - 1; j++) {
+                const temp = this.shapeMatrix[i][j]
+                this.shapeMatrix[i][j] = this.shapeMatrix[j][this.height - 1 - i];
+                this.shapeMatrix[j][this.height - 1 - i] = this.shapeMatrix[this.height - 1 - i][this.height - 1 - j];
+                this.shapeMatrix[this.height - 1 - i][this.height - 1 - j] = this.shapeMatrix[this.height - 1 - j][i];
+                this.shapeMatrix[this.height - 1 - j][i] = temp;
+            }}
+        return this}
     toString() {
         let result = ''
         for (let i = 0; i < this.shapeMatrix.length; i++){
