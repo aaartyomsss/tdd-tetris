@@ -30,7 +30,7 @@ export class Board {
     for (let i = 0; i < this.height; i++) {
       const col = this.boardMatrix[i].indexOf(this.fallingElement)
       if (col === -1) continue
-      if (i + 1 === this.height) {
+      if (i + 1 === this.height || this.boardMatrix[i + 1][col] !== '.') {
         this.fallingElement = undefined
         break
       }
