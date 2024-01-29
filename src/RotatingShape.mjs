@@ -11,6 +11,16 @@ export class RotatingShape {
         this.shapeMatrix = rows.map(row => row.split(""));
     }
 
+    rotateRight() {
+        for (let i = 0; i < parseInt(this.height / 2); i++) {
+            for (let j = i; j < this.height - i - 1; j++) {
+                const temp = this.shapeMatrix[i][j]
+                this.shapeMatrix[i][j] = this.shapeMatrix[this.height - 1 - j][i];
+                this.shapeMatrix[this.height - 1 - j][i] = this.shapeMatrix[this.height - 1 - i][this.height - 1 - j];
+                this.shapeMatrix[this.height - 1 - i][this.height - 1 - j] = this.shapeMatrix[j][this.height - 1 - i];
+                this.shapeMatrix[j][this.height - 1 - i] = temp;}}
+        return this
+    }
     toString() {
         let result = ''
         for (let i = 0; i < this.shapeMatrix.length; i++){
