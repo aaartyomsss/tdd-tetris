@@ -18,7 +18,9 @@ export class RotatingShape {
                 this.shapeMatrix[i][j] = this.shapeMatrix[this.height - 1 - j][i];
                 this.shapeMatrix[this.height - 1 - j][i] = this.shapeMatrix[this.height - 1 - i][this.height - 1 - j];
                 this.shapeMatrix[this.height - 1 - i][this.height - 1 - j] = this.shapeMatrix[j][this.height - 1 - i];
-                this.shapeMatrix[j][this.height - 1 - i] = temp;}}
+                this.shapeMatrix[j][this.height - 1 - i] = temp;
+            }
+        }
         return this
     }
     toString() {
