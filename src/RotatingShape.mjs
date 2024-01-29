@@ -36,7 +36,7 @@ export class RotatingShape {
                 a[this.height - 1 - j][i] = temp;
             }
         }
-        return this
+        return new RotatingShape(a.map(row => row.join('')).join('\n'))
     }
 
     toString() {
