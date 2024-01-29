@@ -12,16 +12,17 @@ export class RotatingShape {
     }
 
     rotateRight() {
+        let a = this.shapeMatrix
         for (let i = 0; i < parseInt(this.height / 2); i++) {
             for (let j = i; j < this.height - i - 1; j++) {
-                const temp = this.shapeMatrix[i][j]
-                this.shapeMatrix[i][j] = this.shapeMatrix[this.height - 1 - j][i];
-                this.shapeMatrix[this.height - 1 - j][i] = this.shapeMatrix[this.height - 1 - i][this.height - 1 - j];
-                this.shapeMatrix[this.height - 1 - i][this.height - 1 - j] = this.shapeMatrix[j][this.height - 1 - i];
-                this.shapeMatrix[j][this.height - 1 - i] = temp;
+                const temp = a[i][j]
+                a[i][j] = a[this.height - 1 - j][i];
+                a[this.height - 1 - j][i] = a[this.height - 1 - i][this.height - 1 - j];
+                a[this.height - 1 - i][this.height - 1 - j] = a[j][this.height - 1 - i];
+                a[j][this.height - 1 - i] = temp;
             }
         }
-        return this
+        return new RotatingShape(a.map(row => row.join('')).join('\n'))
     }
     toString() {
         let result = ''
