@@ -1,10 +1,14 @@
 export class RotatingShape {
     shapeMatrix;
+    height;
+    width;
 
     constructor(shape) {
-        this.shapeMatrix = shape.replaceAll(" ", '')
-                                .split('\n')
-                                .map(row => row.split(""));
+        const rows = shape.replaceAll(" ", '')
+                          .split('\n')
+        this.height = rows.length
+        this.width = rows[0].length
+        this.shapeMatrix = rows.map(row => row.split(""));
     }
 
     toString() {
