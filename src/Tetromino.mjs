@@ -52,10 +52,19 @@ export class Tetromino {
         }
     }
 
+    returnNewOShapeOnRotation() {
+        return new Tetromino(`.OO
+                              .OO
+                              ...`, SHAPE_TYPES.O)
+    }
+
     rotateRight() {
         if (this.shapeType === SHAPE_TYPES.I) {
             return this.rotateShapeI()
         } 
+        if (this.shapeType === SHAPE_TYPES.O) {
+            return this.returnNewOShapeOnRotation()
+        }
         let a = JSON.parse(JSON.stringify(this.shapeMatrix))
         for (let i = 0; i < parseInt(this.height / 2); i++) {
             for (let j = i; j < this.height - i - 1; j++) {const temp = a[i][j] 
