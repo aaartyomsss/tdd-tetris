@@ -21,6 +21,12 @@ export class Tetromino {
                               .....`, SHAPE_TYPES.I)
     }
 
+    static get O_SHAPE() {
+        return new Tetromino(`.OO
+                              .OO
+                              ...`, SHAPE_TYPES.O)
+    }
+
     constructor(shape, shapeType) {
         const rows = shape.replaceAll(" ", '')
                           .split('\n')
