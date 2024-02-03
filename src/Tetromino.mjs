@@ -1,4 +1,8 @@
-
+const SHAPE_TYPES = {
+    T: 'T',
+    I: 'I',
+    O: 'O'
+}
 
 export class Tetromino {
     shapeType;
@@ -6,7 +10,7 @@ export class Tetromino {
     static get T_SHAPE() {
         return new Tetromino(`.T.
                               TTT
-                              ...`, 'T')
+                              ...`, SHAPE_TYPES.T)
     }
 
     static get I_SHAPE() {
@@ -14,7 +18,7 @@ export class Tetromino {
                               .....
                               IIII.
                               .....
-                              .....`, 'I')
+                              .....`, SHAPE_TYPES.I)
     }
 
     constructor(shape, shapeType) {
