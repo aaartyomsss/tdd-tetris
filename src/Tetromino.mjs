@@ -8,6 +8,14 @@ export class Tetromino {
                               ...`)
     }
 
+    static get I_SHAPE() {
+        return new Tetromino(`.....
+                              .....
+                              IIII.
+                              .....
+                              .....`)
+    }
+
     constructor(shape) {
         const rows = shape.replaceAll(" ", '')
                           .split('\n')
@@ -15,7 +23,7 @@ export class Tetromino {
         this.width = rows[0].length
         this.shapeMatrix = rows.map(row => row.split(""));
     }
-    
+
     rotateRight() {
         let a = JSON.parse(JSON.stringify(this.shapeMatrix))
         for (let i = 0; i < parseInt(this.height / 2); i++) {
