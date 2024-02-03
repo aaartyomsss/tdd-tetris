@@ -37,7 +37,13 @@ export class Tetromino {
                                   ..I..
                                   ..I..
                                   .....`, SHAPE_TYPES.I)
-        } 
+        } else {
+            return new Tetromino(`.....
+                                  .....
+                                  IIII.
+                                  .....
+                                  .....`, SHAPE_TYPES.I)
+        }
     }
 
     rotateRight() {
