@@ -31,6 +31,13 @@ export class Tetromino {
     }
 
     rotateRight() {
+        if (this.shapeType === SHAPE_TYPES.I && this.shapeMatrix[2][0] === 'I') {
+            return new Tetromino(`..I..
+                                  ..I..
+                                  ..I..
+                                  ..I..
+                                  .....`, SHAPE_TYPES.I)
+        } 
         let a = JSON.parse(JSON.stringify(this.shapeMatrix))
         for (let i = 0; i < parseInt(this.height / 2); i++) {
             for (let j = i; j < this.height - i - 1; j++) {const temp = a[i][j] 
@@ -41,6 +48,7 @@ export class Tetromino {
             }
         }
         return new Tetromino(a.map(row => row.join('')).join('\n'))
+        
     }
 
     rotateLeft() {
