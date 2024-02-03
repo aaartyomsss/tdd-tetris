@@ -1,11 +1,12 @@
 
 
 export class Tetromino {
+    shapeType;
 
     static get T_SHAPE() {
         return new Tetromino(`.T.
                               TTT
-                              ...`)
+                              ...`, 'T')
     }
 
     static get I_SHAPE() {
@@ -13,15 +14,16 @@ export class Tetromino {
                               .....
                               IIII.
                               .....
-                              .....`)
+                              .....`, 'I')
     }
 
-    constructor(shape) {
+    constructor(shape, shapeType) {
         const rows = shape.replaceAll(" ", '')
                           .split('\n')
         this.height = rows.length
         this.width = rows[0].length
         this.shapeMatrix = rows.map(row => row.split(""));
+        this.shapeType = shapeType
     }
 
     rotateRight() {
