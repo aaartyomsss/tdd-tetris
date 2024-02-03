@@ -12,7 +12,7 @@ export class RotatingShape {
     }
 
     rotateRight() {
-        let a = this.shapeMatrix
+        let a = JSON.parse(JSON.stringify(this.shapeMatrix))
         for (let i = 0; i < parseInt(this.height / 2); i++) {
             for (let j = i; j < this.height - i - 1; j++) {
                 const temp = a[i][j]
@@ -26,7 +26,7 @@ export class RotatingShape {
     }
     
     rotateLeft() {
-        let a = this.shapeMatrix
+        let a = JSON.parse(JSON.stringify(this.shapeMatrix))
         for (let i = 0; i < parseInt(this.height / 2); i++) {
             for (let j = i; j < this.height - i - 1; j++) {
                 const temp = a[i][j]
