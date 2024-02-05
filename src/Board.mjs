@@ -33,22 +33,21 @@ export class Board {
       }
     } else {
       const middleColumn = Math.floor(this.width / 2)
-      this.fallingElementTopLeftColumnIndex = [middleColumn, 0]
+      this.fallingElementTopLeftIndex = [middleColumn, 0]
       this.boardMatrix[0][middleColumn] = element}
   }
 
   tick() {
-    for (let i = 0; i < this.height; i++) {
-      const col = this.boardMatrix[i].indexOf(this.fallingElement)
-      if (col === -1) continue
-      if (i + 1 === this.height || this.boardMatrix[i + 1][col] !== '.') {
+      const [col, row] = this.fallingElementTopLeftIndex
+      if (!col) return
+      if (row + 1 === this.height || this.boardMatrix[row + 1][col] !== '.') {
         this.fallingElement = undefined
-        break
+        this.fallingElementTopLeftIndex = undefined
+        return
       }
-      this.boardMatrix[i][col] = '.'
-      this.boardMatrix[i + 1][col] = this.fallingElement
-      break
-    }
+      this.boardMatrix[row][col] = '.'
+      this.boardMatrix[row + 1][col] = this.fallingElement
+      this.fallingElementTopLeftIndex = [col, row + 1]
   }
 
   toString() {
