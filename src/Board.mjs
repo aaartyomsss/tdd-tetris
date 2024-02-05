@@ -25,7 +25,7 @@ export class Board {
     this.fallingElement = element
     if (element.width && element.height) {
       const startingPosition = Math.floor((this.width - element.width) / 2)
-      this.fallingElementTopLeftColumnIndex = [startingPosition, 0]
+      this.fallingElementTopLeftIndex = [startingPosition, 0]
       for (let i = 0; i < element.height; i++) {
         for (let j = 0; j < element.width; j++) {
           this.boardMatrix[i][startingPosition + j] = element.shapeMatrix[i][j]
