@@ -22,8 +22,16 @@ export class Board {
       throw new Error("already falling")
     }
     this.fallingElement = element
-    const middleColumn = Math.floor(this.width / 2)
-    this.boardMatrix[0][middleColumn] = element
+    if (element.width && element.height) {
+      const startingPosition = Math.floor((this.width - element.width) / 2)
+      for (let i = 0; i < element.height; i++) {
+        for (let j = 0; j < element.width; j++) {
+          this.boardMatrix[i][startingPosition + j] = element.shapeMatrix[i][j]
+        }
+      }
+    } else {
+      const middleColumn = Math.floor(this.width / 2)
+      this.boardMatrix[0][middleColumn] = element}
   }
 
   tick() {
