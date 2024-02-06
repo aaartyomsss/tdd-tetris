@@ -37,6 +37,10 @@ export class Board {
       this.boardMatrix[0][middleColumn] = element}
   }
 
+  moveTetromino() {
+    
+  }
+
   tick() {
       const [col, row] = this.fallingElementTopLeftIndex
       if (!col) return
