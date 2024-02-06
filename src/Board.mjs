@@ -44,10 +44,11 @@ export class Board {
         this.fallingElement = undefined
         this.fallingElementTopLeftIndex = undefined
         return
+      } if (!this.fallingElement.width) {
+        this.boardMatrix[row][col] = '.'
+        this.boardMatrix[row + 1][col] = this.fallingElement
+        this.fallingElementTopLeftIndex = [col, row + 1]
       }
-      this.boardMatrix[row][col] = '.'
-      this.boardMatrix[row + 1][col] = this.fallingElement
-      this.fallingElementTopLeftIndex = [col, row + 1]
   }
 
   toString() {
