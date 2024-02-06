@@ -29,7 +29,7 @@ describe("Falling tetrominoes", () => {
     );
   });
 
-  test.skip("Move tetromino by one", () => {
+  test("Move tetromino by one", () => {
     board.drop(Tetromino.T_SHAPE);
     board.tick()
 

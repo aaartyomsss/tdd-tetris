@@ -38,13 +38,19 @@ export class Board {
   }
 
   moveTetromino() {
-
+    const [col, row] = this.fallingElementTopLeftIndex
+    for (let i = this.fallingElement.height - 1; i >= 0; i--) {
+      for (let j = this.fallingElement.width - 1; j >= 0; j--) {
+        this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j]
+        this.boardMatrix[row + i][col + j] = '.'
+      }
+    }
   }
 
   tick() {
       const [col, row] = this.fallingElementTopLeftIndex
       if (!col) return
-      if (row + 1 === this.height || this.boardMatrix[row + 1][col] !== '.') {
+      if (row + 1 === this.height || (this.boardMatrix[row + 1][col] !== '.' && !this.fallingElement.width)) {
         this.fallingElement = undefined
         this.fallingElementTopLeftIndex = undefined
         return
