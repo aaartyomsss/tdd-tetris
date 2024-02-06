@@ -38,7 +38,7 @@ export class Board {
   }
 
   moveTetromino() {
-    
+
   }
 
   tick() {
@@ -52,6 +52,8 @@ export class Board {
         this.boardMatrix[row][col] = '.'
         this.boardMatrix[row + 1][col] = this.fallingElement
         this.fallingElementTopLeftIndex = [col, row + 1]
+      } else {
+        this.moveTetromino()
       }
   }
 
