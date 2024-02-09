@@ -39,12 +39,14 @@ export class Board {
 
   moveTetromino() {
     const [col, row] = this.fallingElementTopLeftIndex
+    if (row + this.fallingElement.height === this.height) return
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j]
         this.boardMatrix[row + i][col + j] = '.'
       }
     }
+    this.fallingElementTopLeftIndex = [col, row + 1]
   }
 
   tick() {
