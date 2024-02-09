@@ -37,6 +37,15 @@ export class Board {
       this.boardMatrix[0][middleColumn] = element}
   }
 
+  rowIsCompletelyFree(row) {
+    for (const element in row) {
+      if (element !== '.') {
+        return false
+      }
+    }
+    return true
+  }
+
   moveTetromino() {
     const [col, row] = this.fallingElementTopLeftIndex
     if (row + this.fallingElement.height === this.height) return
