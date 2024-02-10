@@ -52,16 +52,21 @@ export class Board {
       && !this.rowIsCompletelyFree(this.boardMatrix[this.height - 1])) return
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
-        this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j]
-        this.boardMatrix[row + i][col + j] = '.'
+        if (row + i + 1 < this.height && this.fallingElement.shapeMatrix[i][j] !== this.boardMatrix[row + i + 1][col + j]) {
+          this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j]
+        } 
+        if (row + i < this.height) {
+          this.boardMatrix[row + i][col + j] = '.'
+        }
       }
+      if (!this.rowIsCompletelyFree(this.boardMatrix[this.height - 1]) && i === 0) return
     }
     this.fallingElementTopLeftIndex = [col, row + 1]
   }
 
   tick() {
+      if (!this.fallingElementTopLeftIndex) return
       const [col, row] = this.fallingElementTopLeftIndex
-      if (!col) return
       if (row + 1 === this.height || (this.boardMatrix[row + 1][col] !== '.' && !this.fallingElement.width)) {
         this.fallingElement = undefined
         this.fallingElementTopLeftIndex = undefined
