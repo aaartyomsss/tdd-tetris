@@ -50,13 +50,17 @@ export class Board {
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         if (row + i + 1 < this.height && this.fallingElement.shapeMatrix[i][j] !== this.boardMatrix[row + i + 1][col + j]) {
-          this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j]} 
-        if (row + i < this.height) {this.boardMatrix[row + i][col + j] = '.'
-      }
-    } if (!this.rowIsCompletelyFree(this.boardMatrix[this.height - 1]) && i === 0) return true
+          this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j]
+        } 
+        if (row + i < this.height) {
+          this.boardMatrix[row + i][col + j] = '.'
+        }
+      } 
+      if (!this.rowIsCompletelyFree(this.boardMatrix[this.height - 1]) && i === 0) 
+        return true
+    }
   }
-  }
-  
+
   moveTetromino() {
     const [col, row] = this.fallingElementTopLeftIndex
     if (row + this.fallingElement.height === this.height 
