@@ -107,6 +107,16 @@ export class Tetromino {
         return true
       }
 
+    freeRowsFromBottom(){
+        let count = 0
+        for (let i = this.height - 1; i >= 0; i--) {
+            if (this.rowIsCompletelyFree(this.shapeMatrix[i])) count++
+            else {
+                break}
+        }
+        return count
+    }
+
     toString() {
         let result = ''
         for (let i = 0; i < this.shapeMatrix.length; i++){

@@ -62,6 +62,10 @@ describe("The I shape", () => {
     );
   });
 
+  test("Returns how many rows from the bottom are free", () => {
+    expect(shape.freeRowsFromBottom()).to.equal(2);
+  });
+
   test("can be rotated right/clockwise", () => {
     expect(shape.rotateRight().toString()).to.equalShape(
       `..I..
