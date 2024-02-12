@@ -56,7 +56,7 @@ export class Board {
   #moveTetromino(row, col) {
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
-        if (row + i + 1 < this.height && this.fallingElement.shapeMatrix[i][j] !== this.boardMatrix[row + i + 1][col + j]) {
+        if (row + i + 1 < this.height && '.' === this.boardMatrix[row + i + 1][col + j]) {
           this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j]
         } 
         if (row + i < this.height) {
@@ -64,7 +64,8 @@ export class Board {
         }
       } 
       console.log(this.toString())
-      if (!this.isWidthFree(this.boardMatrix[this.height - 1], col, this.fallingElement.width) && i === 0) {
+      if (!this.isWidthFree(this.boardMatrix[this.height - 1], col, this.fallingElement.width) && i === 0
+          || this.boardMatrix[col+this.fallingElement.height] && !this.isWidthFree(this.boardMatrix[col + this.fallingElement.height], col, this.fallingElement.width)) {
         console.log("Does this cause the break?")
         return true
       }
