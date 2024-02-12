@@ -50,6 +50,7 @@ export class Board {
     for (let i = start; i < start + length; i++) {
       if (row[i] !== '.') return false
     }
+    return true
   }
 
   #moveTetromino(row, col) {
@@ -63,7 +64,7 @@ export class Board {
         }
       } 
       console.log(this.toString())
-      if (!this.rowIsCompletelyFree(this.boardMatrix[this.height - 1]) && i === 0) {
+      if (!this.isWidthFree(this.boardMatrix[this.height - 1], col, this.fallingElement.width) && i === 0) {
         console.log("Does this cause the break?")
         return true
       }
