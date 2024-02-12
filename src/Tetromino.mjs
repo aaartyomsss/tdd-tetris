@@ -100,19 +100,20 @@ export class Tetromino {
 
     rowIsCompletelyFree(row) {
         for (const i in row) {
-          if (row[i] !== '.') {
-            return false
-          }
+            if (row[i] !== '.') {
+                return false
+            }
         }
         return true
-      }
+    }
 
     freeRowsFromBottom(){
         let count = 0
         for (let i = this.height - 1; i >= 0; i--) {
             if (this.rowIsCompletelyFree(this.shapeMatrix[i])) count++
             else {
-                break}
+                break
+            }
         }
         return count
     }
