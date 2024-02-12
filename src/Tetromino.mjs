@@ -98,6 +98,15 @@ export class Tetromino {
         return new Tetromino(a.map(row => row.join('')).join('\n'))
     }
 
+    rowIsCompletelyFree(row) {
+        for (const i in row) {
+          if (row[i] !== '.') {
+            return false
+          }
+        }
+        return true
+      }
+
     toString() {
         let result = ''
         for (let i = 0; i < this.shapeMatrix.length; i++){
