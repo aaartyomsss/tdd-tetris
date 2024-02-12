@@ -46,6 +46,12 @@ export class Board {
     return true
   }
 
+  isWidthFree(row, start, length) {
+    for (let i = start; i < start + length; i++) {
+      if (row[i] !== '.') return false
+    }
+  }
+
   #moveTetromino(row, col) {
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
@@ -56,8 +62,11 @@ export class Board {
           this.boardMatrix[row + i][col + j] = '.'
         }
       } 
-      if (!this.rowIsCompletelyFree(this.boardMatrix[this.height - 1]) && i === 0) 
+      console.log(this.toString())
+      if (!this.rowIsCompletelyFree(this.boardMatrix[this.height - 1]) && i === 0) {
+        console.log("Does this cause the break?")
         return true
+      }
     }
   }
 
