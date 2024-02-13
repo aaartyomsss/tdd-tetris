@@ -68,14 +68,11 @@ export class Board {
 
   #moveTetromino(row, col) {
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
-      const isUpcomingRowCompletelyFree =
-        this.boardMatrix[row + i + 1] &&
-        this.isWidthFree(this.boardMatrix[row + i + 1], col, this.fallingElement.width);
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         if (row + i + 1 < this.height && "." === this.boardMatrix[row + i + 1][col + j]) {
           this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j];
         }
-        if (row + i < this.height && isUpcomingRowCompletelyFree) {
+        if (row + i < this.height) {
           this.boardMatrix[row + i][col + j] = ".";
         }
       }
