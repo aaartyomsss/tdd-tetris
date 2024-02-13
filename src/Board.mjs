@@ -76,12 +76,6 @@ export class Board {
           this.boardMatrix[row + i][col + j] = ".";
         }
       }
-      if (
-        this.boardMatrix[col + this.fallingElement.height] &&
-        !this.isWidthFree(this.boardMatrix[col + this.fallingElement.height], col, this.fallingElement.width)
-      ) {
-        return true;
-      }
     }
   }
 
