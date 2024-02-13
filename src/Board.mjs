@@ -47,6 +47,15 @@ export class Board {
     return true;
   }
 
+  isUpcomingSpaceInFrontOfTetrominoIsFree() {
+    return this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()] &&
+    this.isWidthFree(
+      this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()],
+      col,
+      this.fallingElement.width
+    );
+  }
+
   isWidthFree(row, start, length) {
     for (let i = start; i < start + length; i++) {
       if (row[i] !== ".") return false;
