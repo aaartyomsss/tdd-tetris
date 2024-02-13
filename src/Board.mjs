@@ -90,7 +90,7 @@ export class Board {
       this.fallingElementTopLeftIndex = undefined;
       return;
     }
-    if (this.#moveTetromino(row, col)) return;
+    this.#moveTetromino(row, col)
     this.fallingElementTopLeftIndex = [col, row + 1];
   }
 
