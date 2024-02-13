@@ -49,11 +49,13 @@ export class Board {
 
   isUpcomingSpaceInFrontOfTetrominoIsFree() {
     const [col, row] = this.fallingElementTopLeftIndex;
-    return this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()] &&
-    this.isWidthFree(
-      this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()],
-      col,
-      this.fallingElement.width
+    return (
+      this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()] &&
+      this.isWidthFree(
+        this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()],
+        col,
+        this.fallingElement.width
+      )
     );
   }
 
@@ -89,8 +91,9 @@ export class Board {
   moveTetromino() {
     const [col, row] = this.fallingElementTopLeftIndex;
     if (
-      row + this.fallingElement.height === this.height &&
-      !this.rowIsCompletelyFree(this.boardMatrix[this.height - 1]) || !this.isUpcomingSpaceInFrontOfTetrominoIsFree()
+      (row + this.fallingElement.height === this.height &&
+        !this.rowIsCompletelyFree(this.boardMatrix[this.height - 1])) ||
+      !this.isUpcomingSpaceInFrontOfTetrominoIsFree()
     ) {
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
