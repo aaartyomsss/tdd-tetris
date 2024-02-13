@@ -115,11 +115,16 @@ export class Board {
     const [col, row] = this.fallingElementTopLeftIndex;
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
-        if (col + j + 1 < this.width && "." === this.boardMatrix[row + i][col + j + 1]) {this.boardMatrix[row + i][col + j + 1] = this.fallingElement.shapeMatrix[i][j];
+        if (col + j + 1 < this.width && "." === this.boardMatrix[row + i][col + j + 1]) {
+          this.boardMatrix[row + i][col + j + 1] = this.fallingElement.shapeMatrix[i][j];
         }
-        if (col + j < this.width) {this.boardMatrix[row + i][col + j] = ".";
-        }}}
-    this.fallingElementTopLeftIndex = [col + 1, row]; }
+        if (col + j < this.width) {
+          this.boardMatrix[row + i][col + j] = ".";
+        }
+      }
+    }
+    this.fallingElementTopLeftIndex = [col + 1, row];
+  }
 
   toString() {
     let result = "";
