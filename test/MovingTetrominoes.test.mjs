@@ -28,5 +28,21 @@ describe("Falling tetrominoes", () => {
     );
   });
 
+  test("Can be moved left by one", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.moveLeft();
+
+    console.log(board.toString())
+
+    expect(board.toString()).to.equalShape(
+      `...T......
+       ..TTT.....
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
   
 });
