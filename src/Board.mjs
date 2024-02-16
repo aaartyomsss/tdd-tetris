@@ -113,6 +113,7 @@ export class Board {
 
   moveRight() {
     const [col, row] = this.fallingElementTopLeftIndex;
+    if (col + this.fallingElement.width === this.width) return
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         if (col + j + 1 < this.width && "." === this.boardMatrix[row + i][col + j + 1]) {

@@ -73,5 +73,29 @@ describe("Falling tetrominoes", () => {
     );
 
   })
+
+  test("cannot be moved left beyond the board", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+
+
+    expect(board.toString()).to.equalShape(
+      `........T.
+       .......TTT
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+
+  })
   
 });
