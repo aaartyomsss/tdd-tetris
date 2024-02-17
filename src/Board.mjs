@@ -82,11 +82,7 @@ export class Board {
   moveTetromino() {
     if (!this.fallingElement) return
     const [col, row] = this.fallingElementTopLeftIndex;
-    if (
-      (row + this.fallingElement.height === this.height &&
-        !this.rowIsCompletelyFree(this.boardMatrix[this.height - 1])) ||
-      !this.isUpcomingSpaceInFrontOfTetrominoIsFree()
-    ) {
+    if (!this.isUpcomingSpaceInFrontOfTetrominoIsFree()) {
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
       return;
@@ -129,6 +125,7 @@ export class Board {
   }
 
   moveLeft() {
+    if (!this.fallingElement) return
     const [col, row] = this.fallingElementTopLeftIndex;
     if (col === 0) return
     for (let i = 0; i < this.fallingElement.height; i++) {
@@ -146,6 +143,7 @@ export class Board {
 
   moveDown() {
     this.moveTetromino()
+    console.log(this.toString())
   }
 
   toString() {

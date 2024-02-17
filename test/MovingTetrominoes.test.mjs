@@ -196,4 +196,49 @@ describe("Falling tetrominoes", () => {
     );
   })
   
+  test("it cannot be moved left through other shapes", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.drop(Tetromino.T_SHAPE);
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveDown()
+    board.moveLeft()
+    board.moveLeft()
+
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       .T..T.....
+       TTTTTT....`
+    );
+  })
+  
 });
