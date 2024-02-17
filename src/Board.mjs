@@ -143,6 +143,10 @@ export class Board {
     this.fallingElementTopLeftIndex = [col - 1, row];
   }
 
+  moveDown() {
+    this.moveTetromino()
+  }
+
   toString() {
     let result = "";
     for (let i = 0; i < this.boardMatrix.length; i++) {
