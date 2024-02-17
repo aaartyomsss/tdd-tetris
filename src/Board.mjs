@@ -80,6 +80,7 @@ export class Board {
   }
 
   moveTetromino() {
+    if (!this.fallingElement) return
     const [col, row] = this.fallingElementTopLeftIndex;
     if (
       (row + this.fallingElement.height === this.height &&
