@@ -97,5 +97,22 @@ describe("Falling tetrominoes", () => {
     );
 
   })
+
+  test("cannot be moved right and then ticks down", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.moveRight()
+    board.tick()
+
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       .....T....
+       ....TTT...
+       ..........
+       ..........
+       ..........`
+    );
+
+  })
   
 });
