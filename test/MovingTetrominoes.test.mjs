@@ -5,6 +5,11 @@ import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
 
+function fallToBottom(board, limit = 10) {
+  for (let i = 0; i < limit; i++) {
+    board.tick();
+  }
+}
 
 describe("Falling tetrominoes", () => {
   let board;
@@ -201,32 +206,9 @@ describe("Falling tetrominoes", () => {
     board.moveLeft()
     board.moveLeft()
     board.moveLeft()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
+    fallToBottom(board)
     board.drop(Tetromino.T_SHAPE);
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
-    board.moveDown()
+    fallToBottom(board)
     board.moveLeft()
     board.moveLeft()
 
@@ -238,6 +220,32 @@ describe("Falling tetrominoes", () => {
        ..........
        .T..T.....
        TTTTTT....`
+    );
+  })
+
+  test.skip("it cannot be moved right through other shapes", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    fallToBottom(board)
+    board.drop(Tetromino.T_SHAPE);
+    fallToBottom(board, 4)
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       .....T..T.
+       ....TTTTTT`
     );
   })
   
