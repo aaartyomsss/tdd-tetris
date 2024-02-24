@@ -59,11 +59,18 @@ export class Board {
     );
   }
 
-  isHeightFree(boardMatrix, col, colStart, height) {
+  isHeightFree(col, colStart, height) {
     for (let i = colStart; i < colStart + height; i++) {
-      if (boardMatrix[i][col] !== '.') return false
+      if (this.boardMatrix[i][col] !== '.') return false
     }
     return true
+  }
+
+  isUpcomingHeightFree(colDirection) {
+    const [col, row] = this.fallingElementTopLeftIndex;
+    if (colDirection === 1) {
+      return this.isHeightFree(this.boardMatrix, col + this.fallingElement.width + colDirection, this.fallingElement.height)
+    }
   }
 
 
