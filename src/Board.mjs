@@ -59,6 +59,13 @@ export class Board {
     );
   }
 
+  isHeightFree(boardMatrix, col, colStart, height) {
+    for (let i = colStart; i < colStart + height; i++) {
+      if (boardMatrix[i][col] !== '.') return false
+    }
+    return true
+  }
+
 
   isWidthFree(row, start, length) {
     for (let i = start; i < start + length; i++) {
