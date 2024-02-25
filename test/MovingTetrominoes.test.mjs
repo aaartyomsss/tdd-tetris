@@ -208,7 +208,7 @@ describe("Falling tetrominoes", () => {
     board.moveLeft()
     fallToBottom(board)
     board.drop(Tetromino.T_SHAPE);
-    fallToBottom(board)
+    fallToBottom(board, 4)
     board.moveLeft()
     board.moveLeft()
 

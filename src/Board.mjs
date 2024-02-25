@@ -71,6 +71,8 @@ export class Board {
     const elementHeightWithoutBottomDots = this.fallingElement.height - this.fallingElement.freeRowsFromBottom()
     if (colDirection === 1) {
       return this.isHeightFree(col + this.fallingElement.width, row, elementHeightWithoutBottomDots)
+    } else if (colDirection === -1) {
+      return this.isHeightFree(col - 1, row, elementHeightWithoutBottomDots)
     }
   }
 
@@ -147,6 +149,7 @@ export class Board {
     if (!this.fallingElement) return
     const [col, row] = this.fallingElementTopLeftIndex;
     if (col === 0) return
+    if (!this.isUpcomingHeightFree(-1)) return
     for (let i = 0; i < this.fallingElement.height; i++) {
       for (let j = 0; j < this.fallingElement.width; j++) {
         if (col + j - 1 >= 0 && "." === this.boardMatrix[row + i][col + j - 1]) {
