@@ -39,15 +39,18 @@ export class Board {
   }
 
   rotateRight() {
-    const newElement = this.fallingElement.rotateRight()
-    this.fallingElement = newElement
-    this.updateElementOnBoardPostRotation()
+    const newElement = this.fallingElement.rotateRight();
+    this.fallingElement = newElement;
+    this.updateElementOnBoardPostRotation();
   }
   updateElementOnBoardPostRotation() {
     const [col, row] = this.fallingElementTopLeftIndex;
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
-          this.boardMatrix[row + i][col + j] = this.fallingElement.shapeMatrix[i][j];}}}
+        this.boardMatrix[row + i][col + j] = this.fallingElement.shapeMatrix[i][j];
+      }
+    }
+  }
   rowIsCompletelyFree(row) {
     for (const i in row) {
       if (row[i] !== ".") {
@@ -71,21 +74,20 @@ export class Board {
 
   isHeightFree(col, colStart, height) {
     for (let i = colStart; i <= colStart + height - 1; i++) {
-      if (this.boardMatrix[i][col] !== '.') return false
+      if (this.boardMatrix[i][col] !== ".") return false;
     }
-    return true
+    return true;
   }
 
   isUpcomingHeightFree(colDirection) {
     const [col, row] = this.fallingElementTopLeftIndex;
-    const elementHeightWithoutBottomDots = this.fallingElement.height - this.fallingElement.freeRowsFromBottom()
+    const elementHeightWithoutBottomDots = this.fallingElement.height - this.fallingElement.freeRowsFromBottom();
     if (colDirection === 1) {
-      return this.isHeightFree(col + this.fallingElement.width, row, elementHeightWithoutBottomDots)
+      return this.isHeightFree(col + this.fallingElement.width, row, elementHeightWithoutBottomDots);
     } else if (colDirection === -1) {
-      return this.isHeightFree(col - 1, row, elementHeightWithoutBottomDots)
+      return this.isHeightFree(col - 1, row, elementHeightWithoutBottomDots);
     }
   }
-
 
   isWidthFree(row, start, length) {
     for (let i = start; i < start + length; i++) {
@@ -108,7 +110,7 @@ export class Board {
   }
 
   moveTetromino() {
-    if (!this.fallingElement) return
+    if (!this.fallingElement) return;
     const [col, row] = this.fallingElementTopLeftIndex;
     if (!this.isUpcomingSpaceInFrontOfTetrominoIsFree()) {
       this.fallingElement = undefined;
@@ -137,17 +139,17 @@ export class Board {
   }
 
   moveRight() {
-    if (!this.fallingElement) return
+    if (!this.fallingElement) return;
     const [col, row] = this.fallingElementTopLeftIndex;
-    if (col + this.fallingElement.width === this.width) return
-    if (!this.isUpcomingHeightFree(1)) return
+    if (col + this.fallingElement.width === this.width) return;
+    if (!this.isUpcomingHeightFree(1)) return;
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         if (col + j + 1 < this.width && row + i < this.height && "." === this.boardMatrix[row + i][col + j + 1]) {
           this.boardMatrix[row + i][col + j + 1] = this.fallingElement.shapeMatrix[i][j];
         }
 
-        if (row + i < this.height) {  
+        if (row + i < this.height) {
           this.boardMatrix[row + i][col + j] = ".";
         }
       }
@@ -156,10 +158,10 @@ export class Board {
   }
 
   moveLeft() {
-    if (!this.fallingElement) return
+    if (!this.fallingElement) return;
     const [col, row] = this.fallingElementTopLeftIndex;
-    if (col === 0) return
-    if (!this.isUpcomingHeightFree(-1)) return
+    if (col === 0) return;
+    if (!this.isUpcomingHeightFree(-1)) return;
     for (let i = 0; i < this.fallingElement.height; i++) {
       for (let j = 0; j < this.fallingElement.width; j++) {
         if (col + j - 1 >= 0 && "." === this.boardMatrix[row + i][col + j - 1]) {
@@ -174,8 +176,8 @@ export class Board {
   }
 
   moveDown() {
-    this.moveTetromino()
-    console.log(this.toString())
+    this.moveTetromino();
+    console.log(this.toString());
   }
 
   toString() {
