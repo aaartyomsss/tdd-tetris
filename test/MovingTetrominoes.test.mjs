@@ -223,7 +223,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("it cannot be moved right through other shapes", () => {
+  test("it cannot be moved right through other shapes", () => {
     board.drop(Tetromino.T_SHAPE);
     board.moveRight()
     board.moveRight()

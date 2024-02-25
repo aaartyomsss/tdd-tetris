@@ -60,7 +60,7 @@ export class Board {
   }
 
   isHeightFree(col, colStart, height) {
-    for (let i = colStart; i < colStart + height; i++) {
+    for (let i = colStart; i <= colStart + height - 1; i++) {
       if (this.boardMatrix[i][col] !== '.') return false
     }
     return true
@@ -68,8 +68,9 @@ export class Board {
 
   isUpcomingHeightFree(colDirection) {
     const [col, row] = this.fallingElementTopLeftIndex;
+    const elementHeightWithoutBottomDots = this.fallingElement.height - this.fallingElement.freeRowsFromBottom()
     if (colDirection === 1) {
-      return this.isHeightFree(this.boardMatrix, col + this.fallingElement.width + colDirection, this.fallingElement.height)
+      return this.isHeightFree(col + this.fallingElement.width, row, elementHeightWithoutBottomDots)
     }
   }
 
@@ -127,6 +128,7 @@ export class Board {
     if (!this.fallingElement) return
     const [col, row] = this.fallingElementTopLeftIndex;
     if (col + this.fallingElement.width === this.width) return
+    if (!this.isUpcomingHeightFree(1)) return
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         if (col + j + 1 < this.width && row + i < this.height && "." === this.boardMatrix[row + i][col + j + 1]) {
