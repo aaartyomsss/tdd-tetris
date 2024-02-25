@@ -248,5 +248,24 @@ describe("Falling tetrominoes", () => {
        ....TTTTTT`
     );
   })
+
+  test("tetrominos can be stacked on top of each other with not equal column indexing", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.moveRight()
+    fallToBottom(board)
+    board.drop(Tetromino.T_SHAPE);
+    board.moveLeft()
+    fallToBottom(board)
+
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ...T......
+       ..TTTT....
+       ....TTT...`
+    );
+  })
   
 });
