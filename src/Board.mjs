@@ -66,8 +66,8 @@ export class Board {
       this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()] &&
       this.isWidthFree(
         this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()],
-        col,
-        this.fallingElement.width
+        col + this.fallingElement.freeColsFromLeft(),
+        this.fallingElement.width - this.fallingElement.freeColsFromRight()
       )
     );
   }
@@ -98,7 +98,7 @@ export class Board {
 
   #moveTetromino(row, col) {
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
-      for (let j = this.fallingElement.width - 1; j >= 0; j--) {
+      for (let j = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight(); j >= 0 + this.fallingElement.freeColsFromLeft(); j--) {
         if (row + i + 1 < this.height && "." === this.boardMatrix[row + i + 1][col + j]) {
           this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j];
         }
@@ -177,7 +177,6 @@ export class Board {
 
   moveDown() {
     this.moveTetromino();
-    console.log(this.toString());
   }
 
   toString() {

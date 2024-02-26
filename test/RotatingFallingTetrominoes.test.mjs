@@ -32,7 +32,7 @@ describe("Falling tetrominoes", () => {
     );
   });
 
-  test.skip("Tetromino can stand side by side once rotated", () => {
+  test("Tetromino can stand side by side once rotated", () => {
     board.drop(Tetromino.T_SHAPE);
     board.rotateRight()
     board.moveLeft()
