@@ -118,6 +118,22 @@ export class Tetromino {
         return count
     }
 
+    isColumnFree(colIndex) {
+        for (let i = 0; i < this.height; i++) {
+            if (this.shapeMatrix[i][colIndex] !== '.') return false
+        }
+        return true
+    }
+
+    freeColsFromLeft() {
+        let count = 0
+        for (let i = 0; i < this.width; i++) {
+            if (this.isColumnFree(i)) count++
+            else break
+        }
+        return count
+    }
+
     toString() {
         let result = ''
         for (let i = 0; i < this.shapeMatrix.length; i++){

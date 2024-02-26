@@ -31,5 +31,26 @@ describe("Falling tetrominoes", () => {
        ..........`
     );
   });
+
+  test.skip("Tetromino can stand side by side once rotated", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateRight()
+    board.moveLeft()
+    board.moveLeft()
+    fallToBottom(board)
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateRight()
+    fallToBottom(board)
+    
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..T.T.....
+       ..TTTT....
+       ..T.T.....`
+    );
+  });
   
 });

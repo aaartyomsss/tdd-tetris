@@ -43,6 +43,10 @@ describe("The T shape", () => {
     );
   });
 
+  test("Returns how cols from the left are free", () => {
+    expect(shape.rotateRight().freeColsFromLeft()).to.equal(1);
+  });
+
   test("has 4 distinct orientations", () => {
     expect(distinctOrientations(shape).size).to.equal(4);
   });
@@ -64,6 +68,10 @@ describe("The I shape", () => {
 
   test("Returns how many rows from the bottom are free", () => {
     expect(shape.freeRowsFromBottom()).to.equal(2);
+  });
+
+  test("Returns how cols from the left are free", () => {
+    expect(shape.rotateRight().freeColsFromLeft()).to.equal(2);
   });
 
   test("can be rotated right/clockwise", () => {
