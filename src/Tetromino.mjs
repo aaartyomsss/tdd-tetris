@@ -134,6 +134,15 @@ export class Tetromino {
         return count
     }
 
+    freeColsFromRight() {
+        let count = 0
+        for (let i = this.width - 1; i >= 0; i--) {
+            if (this.isColumnFree(i)) count++
+            else break
+        }
+        return count
+    }
+
     toString() {
         let result = ''
         for (let i = 0; i < this.shapeMatrix.length; i++){
