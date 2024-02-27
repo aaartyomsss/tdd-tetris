@@ -47,6 +47,8 @@ describe("Falling tetrominoes", () => {
     board.drop(Tetromino.T_SHAPE);
     fallToBottom(board);
 
+    console.log(board.toString())
+
     expect(board.toString()).to.equalShape(
       `..........
        ..........

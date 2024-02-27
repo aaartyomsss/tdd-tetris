@@ -114,19 +114,24 @@ export class Board {
   }
 
   #checkMoveTetromino(row, col) {
-    for (let i = this.fallingElement.height - 1; i >= 0; i--) {
-      for (let j = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight(); j >= 0 + this.fallingElement.freeColsFromLeft(); j--) {
-        if (row + i + 1 < this.height && "." !== this.boardMatrix[row + i + 1][col + j]) {
+    console.log(this.toString(), row, col)
+    for (let i = this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom(); i >= 0; i--) {
+      for (let j = this.fallingElement.width - 1; j >= 0 ; j--) {
+        console.log(row + i + 1, col + j, )
+        console.log(row + i + 1 < this.height && "." !== this.boardMatrix[row + i + 1][col + j] && i !== 0)
+        if (row + i + 1 < this.height && "." !== this.boardMatrix[row + i + 1][col + j] && i > 0) {
           return false
         }
       }
     }
     return true
   }
+
   moveTetromino() {
     if (!this.fallingElement) return;
     const [col, row] = this.fallingElementTopLeftIndex;
-    if (!this.isUpcomingSpaceInFrontOfTetrominoIsFree()) {
+    if (!this.#checkMoveTetromino(row, col) 
+        || row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom() === this.height) {
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
       return;
