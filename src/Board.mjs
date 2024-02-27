@@ -61,13 +61,17 @@ export class Board {
   }
 
   isUpcomingSpaceInFrontOfTetrominoIsFree() {
-    const [col, row] = this.fallingElementTopLeftIndex;
+    const [col, row] = this.fallingElementTopLeftIndex; 
+
+    const colStartConsideringEmptySpace = col + this.fallingElement.freeColsFromLeft()
+    const colEndConsideringEmptySpace = this.fallingElement.width - this.fallingElement.freeColsFromRight()
+
     return (
       this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()] &&
       this.isWidthFree(
         this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()],
-        col + this.fallingElement.freeColsFromLeft(),
-        this.fallingElement.width - this.fallingElement.freeColsFromRight()
+        colStartConsideringEmptySpace,
+        colEndConsideringEmptySpace
       )
     );
   }
@@ -95,7 +99,7 @@ export class Board {
     }
     return true;
   }
-
+  // TODO: Couldn't actual move function check first if there are any forbidden actions?
   #moveTetromino(row, col) {
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight(); j >= 0 + this.fallingElement.freeColsFromLeft(); j--) {
