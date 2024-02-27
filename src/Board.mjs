@@ -113,6 +113,16 @@ export class Board {
     }
   }
 
+  #checkMoveTetromino(row, col) {
+    for (let i = this.fallingElement.height - 1; i >= 0; i--) {
+      for (let j = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight(); j >= 0 + this.fallingElement.freeColsFromLeft(); j--) {
+        if (row + i + 1 < this.height && "." !== this.boardMatrix[row + i + 1][col + j]) {
+          return false
+        }
+      }
+    }
+    return true
+  }
   moveTetromino() {
     if (!this.fallingElement) return;
     const [col, row] = this.fallingElementTopLeftIndex;
