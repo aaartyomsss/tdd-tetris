@@ -84,8 +84,10 @@ export class Board {
   }
   
   #moveTetromino(row, col) {
+    const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight()
+    const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft()
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
-      for (let j = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight(); j >= 0 + this.fallingElement.freeColsFromLeft(); j--) {
+      for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
         if (row + i + 1 < this.height && "." === this.boardMatrix[row + i + 1][col + j]) {
           this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j];
         }
