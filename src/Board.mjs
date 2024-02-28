@@ -82,7 +82,7 @@ export class Board {
     }
     return true;
   }
-  // TODO: Couldn't actual move function check first if there are any forbidden actions?
+  
   #moveTetromino(row, col) {
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight(); j >= 0 + this.fallingElement.freeColsFromLeft(); j--) {
