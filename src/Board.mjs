@@ -98,7 +98,7 @@ export class Board {
 
   #checkMoveTetromino(row, col) {
     const upcomingRow = row + 1 + this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom()
-      for (let j = this.fallingElement.width - 1; j >= this.fallingElement.freeColsFromLeft() ; j--) {
+      for (let j = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight(); j >= this.fallingElement.freeColsFromLeft() ; j--) {
         if (upcomingRow < this.height && "." !== this.boardMatrix[upcomingRow][col + j]) {
           return false
         }
