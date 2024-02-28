@@ -67,22 +67,6 @@ export class Board {
     return true;
   }
 
-  isUpcomingSpaceInFrontOfTetrominoIsFree() {
-    const [col, row] = this.fallingElementTopLeftIndex; 
-
-    const colStartConsideringEmptySpace = col + this.fallingElement.freeColsFromLeft()
-    const colEndConsideringEmptySpace = this.fallingElement.width - this.fallingElement.freeColsFromRight()
-
-    return (
-      this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()] &&
-      this.isWidthFree(
-        this.boardMatrix[row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom()],
-        colStartConsideringEmptySpace,
-        colEndConsideringEmptySpace
-      )
-    );
-  }
-
   isHeightFree(col, colStart, height) {
     for (let i = colStart; i <= colStart + height - 1; i++) {
       if (this.boardMatrix[i][col] !== ".") return false;
