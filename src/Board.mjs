@@ -114,16 +114,12 @@ export class Board {
   }
 
   #checkMoveTetromino(row, col) {
-    console.log(this.toString(), row, col)
-    for (let i = this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom(); i >= 0; i--) {
-      for (let j = this.fallingElement.width - 1; j >= 0 ; j--) {
-        console.log(row + i + 1, col + j, )
-        console.log(row + i + 1 < this.height && "." !== this.boardMatrix[row + i + 1][col + j] && i !== 0)
-        if (row + i + 1 < this.height && "." !== this.boardMatrix[row + i + 1][col + j] && i > 0) {
+    const upcomingRow = row + 1 + this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom()
+      for (let j = this.fallingElement.width - 1; j >= this.fallingElement.freeColsFromLeft() ; j--) {
+        if (upcomingRow < this.height && "." !== this.boardMatrix[upcomingRow][col + j]) {
           return false
         }
       }
-    }
     return true
   }
 
