@@ -11,7 +11,7 @@ function fallToBottom(board, limit = 10) {
   }
 }
 
-describe("Falling tetrominoes", () => {
+describe("Falling rotating tetrominoes only T shape", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
@@ -110,3 +110,63 @@ describe("Falling tetrominoes", () => {
   });
 
 });
+
+describe('Falling rotating tetrominoes only I shape', () => {
+  let board;
+  beforeEach(() => {
+    board = new Board(10, 10);
+  });
+
+  test("Tetrominos of shape I can stand side by side", () => {
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateLeft()
+    fallToBottom(board)
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateLeft()
+    board.moveRight()
+    fallToBottom(board)
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ....II....
+       ....II....
+       ....II....
+       ....II....`
+    );
+  });
+
+  test.skip("Tetromino cannot be rotated if there is no space", () => {
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateLeft()
+    board.moveRight()
+    board.moveRight()   
+    fallToBottom(board)
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateLeft()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    fallToBottom(board, 6)
+    board.rotateRight()
+
+    console.log(board.toString())
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ......II..
+       ......II..
+       ......II..
+       ......II..`
+    );
+  });
+})

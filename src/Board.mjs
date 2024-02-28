@@ -36,15 +36,18 @@ export class Board {
       this.fallingElementTopLeftIndex = [middleColumn, 0];
       this.boardMatrix[0][middleColumn] = element;
     }
+    console.log(this.toString(), "After drop ! ! ! !")
   }
 
   rotateRight() {
+    if (!this.fallingElement) return
     const newElement = this.fallingElement.rotateRight();
     this.fallingElement = newElement;
     this.updateElementOnBoardPostRotation();
   }
 
   rotateLeft() {
+    if (!this.fallingElement) return
     const newElement = this.fallingElement.rotateLeft();
     this.fallingElement = newElement;
     this.updateElementOnBoardPostRotation();
@@ -113,12 +116,15 @@ export class Board {
   moveTetromino() {
     if (!this.fallingElement) return;
     const [col, row] = this.fallingElementTopLeftIndex;
+    console.log(this.toString())
     if (!this.#checkMoveTetromino(row, col) 
         || row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom() === this.height) {
+      console.log("Is this failing? ", row, this.fallingElement.height, this.fallingElement.freeRowsFromBottom(), this.height)
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
       return;
     }
+
     this.#moveTetromino(row, col);
     this.fallingElementTopLeftIndex = [col, row + 1];
   }
