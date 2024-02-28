@@ -58,14 +58,6 @@ export class Board {
       }
     }
   }
-  rowIsCompletelyFree(row) {
-    for (const i in row) {
-      if (row[i] !== ".") {
-        return false;
-      }
-    }
-    return true;
-  }
 
   isHeightFree(col, colStart, height) {
     for (let i = colStart; i <= colStart + height - 1; i++) {
