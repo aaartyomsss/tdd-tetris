@@ -53,7 +53,7 @@ describe("Falling tetrominoes", () => {
     );
   });
 
-  test.skip("Tetromino can stand side by side once rotated in reverse order", () => {
+  test("Tetromino can stand side by side once rotated in reverse order", () => {
     board.drop(Tetromino.T_SHAPE);
     board.rotateRight()
     fallToBottom(board)
