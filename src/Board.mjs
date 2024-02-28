@@ -43,6 +43,13 @@ export class Board {
     this.fallingElement = newElement;
     this.updateElementOnBoardPostRotation();
   }
+
+  rotateLeft() {
+    const newElement = this.fallingElement.rotateLeft();
+    this.fallingElement = newElement;
+    this.updateElementOnBoardPostRotation();
+  }
+
   updateElementOnBoardPostRotation() {
     const [col, row] = this.fallingElementTopLeftIndex;
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
