@@ -60,10 +60,7 @@ export class Board {
 
   checkUpdateElementOnBoardPostRotation(maybeNewElement) {
     const [col, row] = this.fallingElementTopLeftIndex;
-    console.log("Current index col, row", col, row);
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement();
-    console.log("Aux board");
-    console.log(auxBoard);
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         if (row + i >= this.height || col + j >= this.width) {
