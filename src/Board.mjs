@@ -25,12 +25,13 @@ export class Board {
     this.fallingElement = element;
     if (element.width && element.height) {
       const startingPosition = Math.floor((this.width - element.width) / 2);
-      
+
       this.fallingElementTopLeftIndex = [startingPosition, 0];
       for (let i = 0; i < element.height; i++) {
         for (let j = 0; j < element.width; j++) {
           if (i - this.fallingElement.freeRowsFromTop() >= 0) {
-            this.boardMatrix[i - this.fallingElement.freeRowsFromTop()][startingPosition + j] = element.shapeMatrix[i][j];
+            this.boardMatrix[i - this.fallingElement.freeRowsFromTop()][startingPosition + j] =
+              element.shapeMatrix[i][j];
           }
         }
       }
@@ -42,38 +43,38 @@ export class Board {
   }
 
   rotateRight() {
-    if (!this.fallingElement) return
+    if (!this.fallingElement) return;
     const newElement = this.fallingElement.rotateRight();
-    if (!this.checkUpdateElementOnBoardPostRotation(newElement)) return
+    if (!this.checkUpdateElementOnBoardPostRotation(newElement)) return;
     this.fallingElement = newElement;
     this.updateElementOnBoardPostRotation();
   }
 
   rotateLeft() {
-    if (!this.fallingElement) return
+    if (!this.fallingElement) return;
     const newElement = this.fallingElement.rotateLeft();
-    if (!this.checkUpdateElementOnBoardPostRotation(newElement)) return
+    if (!this.checkUpdateElementOnBoardPostRotation(newElement)) return;
     this.fallingElement = newElement;
     this.updateElementOnBoardPostRotation();
   }
 
   checkUpdateElementOnBoardPostRotation(maybeNewElement) {
     const [col, row] = this.fallingElementTopLeftIndex;
-    console.log("Current index col, row", col, row)
-    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement() 
-    console.log("Aux board")
-    console.log(auxBoard)
+    console.log("Current index col, row", col, row);
+    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement();
+    console.log("Aux board");
+    console.log(auxBoard);
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         if (row + i >= this.height || col + j >= this.width) {
-          return false
+          return false;
         }
-        if (maybeNewElement.shapeMatrix[i][j] !== '.' && auxBoard[row + i][col + j] !== '.') {
-          return false
+        if (maybeNewElement.shapeMatrix[i][j] !== "." && auxBoard[row + i][col + j] !== ".") {
+          return false;
         }
       }
     }
-    return true
+    return true;
   }
 
   updateElementOnBoardPostRotation() {
@@ -87,18 +88,23 @@ export class Board {
 
   createAuxBoardWithoutCurrentlyFallingElement() {
     const [col, row] = this.fallingElementTopLeftIndex;
-    const auxBoard = JSON.parse(JSON.stringify(this.boardMatrix))
+    const auxBoard = JSON.parse(JSON.stringify(this.boardMatrix));
     const elementHeightWithoutBottomDots = this.fallingElement.height - this.fallingElement.freeRowsFromBottom();
-    const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight()
-    const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft()
+    const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight();
+    const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft();
     for (let i = elementHeightWithoutBottomDots; i >= 0; i--) {
       for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
-        if (i - this.fallingElement.freeRowsFromTop() >= 0 && row + i < this.height && col + j < this.width && this.fallingElement.shapeMatrix[i][j] === auxBoard[row + i - this.fallingElement.freeRowsFromTop()][col + j]) {
-          auxBoard[row + i - this.fallingElement.freeRowsFromTop()][col + j] = '.'
+        if (
+          i - this.fallingElement.freeRowsFromTop() >= 0 &&
+          row + i < this.height &&
+          col + j < this.width &&
+          this.fallingElement.shapeMatrix[i][j] === auxBoard[row + i - this.fallingElement.freeRowsFromTop()][col + j]
+        ) {
+          auxBoard[row + i - this.fallingElement.freeRowsFromTop()][col + j] = ".";
         }
       }
     }
-    return auxBoard
+    return auxBoard;
   }
 
   isHeightFree(col, colStart, height) {
@@ -124,10 +130,10 @@ export class Board {
     }
     return true;
   }
-  
+
   #moveTetromino(row, col) {
-    const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight()
-    const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft()
+    const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight();
+    const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft();
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
         if (row + i + 1 < this.height && "." === this.boardMatrix[row + i + 1][col + j]) {
@@ -141,22 +147,24 @@ export class Board {
   }
 
   #checkMoveTetromino(row, col) {
-    const upcomingRow = row + 1 + this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom()
-    const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight()
-    const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft()
-    for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn ; j--) {
+    const upcomingRow = row + 1 + this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom();
+    const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight();
+    const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft();
+    for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
       if (upcomingRow < this.height && "." !== this.boardMatrix[upcomingRow][col + j]) {
-        return false
+        return false;
       }
     }
-    return true
+    return true;
   }
 
   moveTetromino() {
     if (!this.fallingElement) return;
     const [col, row] = this.fallingElementTopLeftIndex;
-    if (!this.#checkMoveTetromino(row, col) 
-        || row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom() === this.height) {
+    if (
+      !this.#checkMoveTetromino(row, col) ||
+      row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom() === this.height
+    ) {
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
       return;
