@@ -36,7 +36,6 @@ export class Board {
       this.fallingElementTopLeftIndex = [middleColumn, 0];
       this.boardMatrix[0][middleColumn] = element;
     }
-    console.log(this.toString(), "After drop ! ! ! !")
   }
 
   rotateRight() {
@@ -150,10 +149,8 @@ export class Board {
   moveTetromino() {
     if (!this.fallingElement) return;
     const [col, row] = this.fallingElementTopLeftIndex;
-    console.log(this.toString())
     if (!this.#checkMoveTetromino(row, col) 
         || row + this.fallingElement.height - this.fallingElement.freeRowsFromBottom() === this.height) {
-      console.log("Is this failing? ", row, this.fallingElement.height, this.fallingElement.freeRowsFromBottom(), this.height)
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
       return;

@@ -196,3 +196,28 @@ describe('Falling rotating tetrominoes only I shape', () => {
     );
   });
 })
+
+describe("Falling tetromino shape I on a small board", () => {
+  let board;
+  beforeEach(() => {
+    board = new Board(10, 6);
+  });
+
+
+  test.skip("Shape I can be dropped when another I is standing vertically", () => {
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateLeft()
+    fallToBottom(board)
+    board.drop(Tetromino.I_SHAPE)
+
+    expect(board.toString()).to.equalShape(
+      `..IIII....
+       ..........
+       ....I.....
+       ....I.....
+       ....I.....
+       ....I.....`
+    );
+  })
+
+})

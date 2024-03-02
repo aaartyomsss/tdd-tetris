@@ -75,6 +75,10 @@ describe("The I shape", () => {
     expect(shape.freeRowsFromBottom()).to.equal(2);
   });
 
+  test("Returns how many rows from the top are free", () => {
+    expect(shape.freeRowsFromTop()).to.equal(2);
+  });
+
   test("Returns how cols from the left are free", () => {
     expect(shape.rotateRight().freeColsFromLeft()).to.equal(2);
   });

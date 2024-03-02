@@ -118,6 +118,17 @@ export class Tetromino {
         return count
     }
 
+    freeRowsFromTop(){
+        let count = 0
+        for (let i = 0; i < this.height; i++) {
+            if (this.rowIsCompletelyFree(this.shapeMatrix[i])) count++
+            else {
+                break
+            }
+        }
+        return count
+    }
+
     isColumnFree(colIndex) {
         for (let i = 0; i < this.height; i++) {
             if (this.shapeMatrix[i][colIndex] !== '.') return false
