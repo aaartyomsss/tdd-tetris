@@ -204,7 +204,7 @@ describe("Falling tetromino shape I on a small board", () => {
   });
 
 
-  test.skip("Shape I can be dropped when another I is standing vertically", () => {
+  test("Shape I can be dropped when another I is standing vertically", () => {
     board.drop(Tetromino.I_SHAPE);
     console.log(board.toString())
     board.rotateLeft()
