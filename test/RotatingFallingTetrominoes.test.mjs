@@ -140,7 +140,7 @@ describe('Falling rotating tetrominoes only I shape', () => {
     );
   });
 
-  test.skip("Tetromino cannot be rotated if there is no space", () => {
+  test("Tetromino cannot be rotated if there is no space", () => {
     board.drop(Tetromino.I_SHAPE);
     board.rotateLeft()
     board.moveRight()
