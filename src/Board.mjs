@@ -50,6 +50,7 @@ export class Board {
   rotateLeft() {
     if (!this.fallingElement) return
     const newElement = this.fallingElement.rotateLeft();
+    if (!this.checkUpdateElementOnBoardPostRotation(newElement)) return
     this.fallingElement = newElement;
     this.updateElementOnBoardPostRotation();
   }

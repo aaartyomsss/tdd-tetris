@@ -154,7 +154,33 @@ describe('Falling rotating tetrominoes only I shape', () => {
     fallToBottom(board, 6)
     board.rotateRight()
 
-    console.log(board.toString())
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ......II..
+       ......II..
+       ......II..
+       ......II..`
+    );
+  });
+
+  test("Tetromino cannot be rotated left if there is no space", () => {
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateLeft()
+    board.moveRight()
+    board.moveRight()   
+    fallToBottom(board)
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateLeft()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    fallToBottom(board, 6)
+    board.rotateLeft()
 
     expect(board.toString()).to.equalShape(
       `..........
