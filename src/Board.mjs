@@ -56,17 +56,7 @@ export class Board {
 
   checkUpdateElementOnBoardPostRotation(maybeNewElement) {
     const [col, row] = this.fallingElementTopLeftIndex;
-    const auxBoard = JSON.parse(JSON.stringify(this.boardMatrix))
-    const elementHeightWithoutBottomDots = this.fallingElement.height - this.fallingElement.freeRowsFromBottom();
-    const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight()
-    const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft()
-    for (let i = elementHeightWithoutBottomDots; i >= 0; i--) {
-      for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
-        if (row + i < this.height && col + j < this.width && this.fallingElement.shapeMatrix[i][j] === auxBoard[row + i][col + j]) {
-          auxBoard[row + i][col + j] = '.'
-        }
-      }
-    }
+    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement() 
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         if (row + i >= this.height || col + j >= this.width) {
@@ -87,6 +77,22 @@ export class Board {
         this.boardMatrix[row + i][col + j] = this.fallingElement.shapeMatrix[i][j];
       }
     }
+  }
+
+  createAuxBoardWithoutCurrentlyFallingElement() {
+    const [col, row] = this.fallingElementTopLeftIndex;
+    const auxBoard = JSON.parse(JSON.stringify(this.boardMatrix))
+    const elementHeightWithoutBottomDots = this.fallingElement.height - this.fallingElement.freeRowsFromBottom();
+    const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight()
+    const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft()
+    for (let i = elementHeightWithoutBottomDots; i >= 0; i--) {
+      for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
+        if (row + i < this.height && col + j < this.width && this.fallingElement.shapeMatrix[i][j] === auxBoard[row + i][col + j]) {
+          auxBoard[row + i][col + j] = '.'
+        }
+      }
+    }
+    return auxBoard
   }
 
   isHeightFree(col, colStart, height) {
