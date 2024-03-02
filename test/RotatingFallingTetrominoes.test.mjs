@@ -220,4 +220,24 @@ describe("Falling tetromino shape I on a small board", () => {
     );
   })
 
+  test("I can be pushed all the way to the left", () => {
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+
+
+    expect(board.toString()).to.equalShape(
+      `I.........
+       I.........
+       I.........
+       I.........
+       ..........
+       ..........`
+    );
+  })
+
 })

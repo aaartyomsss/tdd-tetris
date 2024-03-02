@@ -117,7 +117,7 @@ export class Board {
     if (colDirection === 1) {
       return this.isHeightFree(col + this.fallingElement.width, row, elementHeightWithoutBottomDots);
     } else if (colDirection === -1) {
-      return this.isHeightFree(col - 1, row, elementHeightWithoutBottomDots);
+      return this.isHeightFree(col + this.fallingElement.freeColsFromLeft() - 1, row, elementHeightWithoutBottomDots);
     }
   }
 
@@ -210,7 +210,7 @@ export class Board {
   moveLeft() {
     if (!this.fallingElement) return;
     const [col, row] = this.fallingElementTopLeftIndex;
-    if (col === 0) return;
+    if (col + this.fallingElement.freeColsFromLeft() === 0) return;
     if (!this.isUpcomingHeightFree(-1)) return;
     for (let i = 0; i < this.fallingElement.height; i++) {
       for (let j = 0; j < this.fallingElement.width; j++) {
