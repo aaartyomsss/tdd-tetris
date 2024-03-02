@@ -25,10 +25,13 @@ export class Board {
     this.fallingElement = element;
     if (element.width && element.height) {
       const startingPosition = Math.floor((this.width - element.width) / 2);
+      
       this.fallingElementTopLeftIndex = [startingPosition, 0];
       for (let i = 0; i < element.height; i++) {
         for (let j = 0; j < element.width; j++) {
-          this.boardMatrix[i][startingPosition + j] = element.shapeMatrix[i][j];
+          if (i - this.fallingElement.freeRowsFromTop() >= 0) {
+            this.boardMatrix[i - this.fallingElement.freeRowsFromTop()][startingPosition + j] = element.shapeMatrix[i][j];
+          }
         }
       }
     } else {
@@ -56,7 +59,10 @@ export class Board {
 
   checkUpdateElementOnBoardPostRotation(maybeNewElement) {
     const [col, row] = this.fallingElementTopLeftIndex;
+    console.log("Current index col, row", col, row)
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement() 
+    console.log("Aux board")
+    console.log(auxBoard)
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
         if (row + i >= this.height || col + j >= this.width) {
@@ -87,8 +93,8 @@ export class Board {
     const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft()
     for (let i = elementHeightWithoutBottomDots; i >= 0; i--) {
       for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
-        if (row + i < this.height && col + j < this.width && this.fallingElement.shapeMatrix[i][j] === auxBoard[row + i][col + j]) {
-          auxBoard[row + i][col + j] = '.'
+        if (i - this.fallingElement.freeRowsFromTop() >= 0 && row + i < this.height && col + j < this.width && this.fallingElement.shapeMatrix[i][j] === auxBoard[row + i - this.fallingElement.freeRowsFromTop()][col + j]) {
+          auxBoard[row + i - this.fallingElement.freeRowsFromTop()][col + j] = '.'
         }
       }
     }

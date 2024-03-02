@@ -206,9 +206,14 @@ describe("Falling tetromino shape I on a small board", () => {
 
   test.skip("Shape I can be dropped when another I is standing vertically", () => {
     board.drop(Tetromino.I_SHAPE);
+    console.log(board.toString())
     board.rotateLeft()
+    console.log(board.toString())
     fallToBottom(board)
+    console.log(board.toString())
     board.drop(Tetromino.I_SHAPE)
+
+    console.log(board.toString())
 
     expect(board.toString()).to.equalShape(
       `..IIII....
