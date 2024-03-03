@@ -60,17 +60,23 @@ export class Board {
 
   checkUpdateElementOnBoardPostRotation(maybeNewElement) {
     const [col, row] = this.fallingElementTopLeftIndex;
+    let startingCol = col
+    const freeColsLeft = maybeNewElement.freeColsFromLeft()
+    if (col < 0 && Math.abs(col) > maybeNewElement.freeColsFromLeft()) {
+      startingCol = freeColsLeft === 0 ? freeColsLeft : col + freeColsLeft
+    }
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement();
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = this.fallingElement.width - 1; j >= 0; j--) {
-        if (row + i >= this.height || col + j >= this.width) {
+        if (row + i >= this.height || startingCol + j >= this.width) {
           return false;
         }
-        if (maybeNewElement.shapeMatrix[i][j] !== "." && auxBoard[row + i][col + j] !== ".") {
+        if (maybeNewElement.shapeMatrix[i][j] !== "." && auxBoard[row + i][startingCol + j] !== ".") {
           return false;
         }
       }
     }
+    this.fallingElementTopLeftIndex = [startingCol, row]
     return true;
   }
 
@@ -86,14 +92,14 @@ export class Board {
   createAuxBoardWithoutCurrentlyFallingElement() {
     const [col, row] = this.fallingElementTopLeftIndex;
     const auxBoard = JSON.parse(JSON.stringify(this.boardMatrix));
-    const elementHeightWithoutBottomDots = this.fallingElement.height - this.fallingElement.freeRowsFromBottom();
+    const elementHeightWithoutBottomDots = this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom();
     const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight();
     const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft();
     for (let i = elementHeightWithoutBottomDots; i >= 0; i--) {
       for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
         if (
           i - this.fallingElement.freeRowsFromTop() >= 0 &&
-          row + i < this.height &&
+          row + i - this.fallingElement.freeRowsFromTop() < this.height &&
           col + j < this.width &&
           this.fallingElement.shapeMatrix[i][j] === auxBoard[row + i - this.fallingElement.freeRowsFromTop()][col + j]
         ) {

@@ -260,6 +260,31 @@ describe("Falling tetromino shape I on a small board", () => {
        ..........`
     );
   })
+})
 
+describe("Wall bounce is implemented", () => {
+  let board;
+  beforeEach(() => {
+    board = new Board(10, 6);
+  });
 
+  test("T can be bounced from the left", () => {
+    board.drop(Tetromino.T_SHAPE)
+    board.rotateRight()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.rotateLeft()
+
+    expect(board.toString()).to.equalShape(
+      `.T........
+       TTT.......
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  })
 })

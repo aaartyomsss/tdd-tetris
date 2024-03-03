@@ -25,4 +25,26 @@ describe("Some board specific functions", () => {
          ['.','.','.','.','T','.','.','.','.','.']]
         );
     })
+
+    test("Returns aux array when T is rotated and pushed to the left", () => {
+        const board = new Board(10, 6);
+        board.drop(Tetromino.T_SHAPE)
+        board.rotateRight()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+
+        const aux = board.createAuxBoardWithoutCurrentlyFallingElement()
+
+        expect(aux).to.toStrictEqual(
+        [['.','.','.','.','.','.','.','.','.','.'],
+         ['.','.','.','.','.','.','.','.','.','.'],
+         ['.','.','.','.','.','.','.','.','.','.'],
+         ['.','.','.','.','.','.','.','.','.','.'],
+         ['.','.','.','.','.','.','.','.','.','.'],
+         ['.','.','.','.','.','.','.','.','.','.']]
+        );
+    })
 })
