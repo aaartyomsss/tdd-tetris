@@ -59,11 +59,14 @@ export class Board {
   }
 
   checkUpdateElementOnBoardPostRotation(maybeNewElement) {
-    const [col, row] = this.fallingElementTopLeftIndex;
+    const [col, row] = this.fallingElementTopLeftIndex
     let startingCol = col
     const freeColsLeft = maybeNewElement.freeColsFromLeft()
     if (col < 0 && Math.abs(col) > maybeNewElement.freeColsFromLeft()) {
       startingCol = freeColsLeft === 0 ? freeColsLeft : col + freeColsLeft
+    }
+    if (col + maybeNewElement.width - maybeNewElement.freeColsFromRight() > this.width) {
+      startingCol = this.width - maybeNewElement.width + maybeNewElement.freeColsFromRight()
     }
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement();
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {

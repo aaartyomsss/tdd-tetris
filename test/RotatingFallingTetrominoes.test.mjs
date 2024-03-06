@@ -287,4 +287,25 @@ describe("Wall bounce is implemented", () => {
        ..........`
     );
   })
+
+  test("T can be bounced from the right", () => {
+    board.drop(Tetromino.T_SHAPE)
+    board.rotateLeft()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.rotateRight()
+
+    expect(board.toString()).to.equalShape(
+      `........T.
+       .......TTT
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  })
 })
