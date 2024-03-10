@@ -81,6 +81,11 @@ export class Tetromino {
                                   .TT.
                                   .T..
                                   ....`, SHAPE_TYPES.T_ARIKA_SHAPE, 3)
+        } else if (this.currentOriantation === 3) {
+            return new Tetromino(`....
+                                  TTT.
+                                  .T..
+                                  ....`, SHAPE_TYPES.T_ARIKA_SHAPE, 0)
         }
     }   
 
