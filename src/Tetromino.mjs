@@ -64,7 +64,15 @@ export class Tetromino {
                               .OO
                               ...`, SHAPE_TYPES.O)
     }
-    rotateTArikaShape() {}   
+
+    rotateTArikaShapeRight() {
+        if (this.currentOriantation === 0) {
+            return new Tetromino(`.T..
+                                  TT..
+                                  .T..
+                                  ....`, SHAPE_TYPES.T_ARIKA_SHAPE, 1)
+        }
+    }   
 
     rotateRight() {
         if (this.shapeType === SHAPE_TYPES.I) {
@@ -74,7 +82,7 @@ export class Tetromino {
             return this.returnNewOShapeOnRotation()
         }
         if (this.shapeType === SHAPE_TYPES.T_ARIKA_SHAPE) {
-            return this.rotateTArikaShape()
+            return this.rotateTArikaShapeRight()
         }
         let a = JSON.parse(JSON.stringify(this.shapeMatrix))
         for (let i = 0; i < parseInt(this.height / 2); i++) {
