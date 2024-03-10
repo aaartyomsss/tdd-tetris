@@ -26,6 +26,13 @@ export class Tetromino {
                               ...`, SHAPE_TYPES.O)
     }
 
+    static get T_ARIKA_SHAPE() {
+        return new Tetromino(`....
+                              TTT.
+                              .T..
+                              ....`, SHAPE_TYPES.O)
+    }
+
     constructor(shape, shapeType) {
         const rows = shape.replaceAll(" ", '')
                           .split('\n')
