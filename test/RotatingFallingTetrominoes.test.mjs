@@ -397,7 +397,7 @@ describe("Wall bounce is implemented", () => {
     );
   })
 
-  test.skip("I wall bounce is implemented from the right", () => {
+  test("I wall bounce is implemented from the right", () => {
     board.drop(Tetromino.I_SHAPE)
     board.rotateLeft()
     board.moveRight()
@@ -412,7 +412,6 @@ describe("Wall bounce is implemented", () => {
 
     console.log(board.toString())
 
-    // Good enough considering change in reqs. in level 7
     expect(board.toString()).to.equalShape(
       `..........
        ..........
