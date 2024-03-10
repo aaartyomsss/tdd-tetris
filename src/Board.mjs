@@ -204,12 +204,13 @@ export class Board {
     const [col, row] = this.fallingElementTopLeftIndex;
     if (col + this.fallingElement.width - this.fallingElement.freeColsFromRight() === this.width) return;
     if (!this.isUpcomingHeightFree(1)) return;
+    const rowWithoutTopDots = row - this.fallingElement.freeRowsFromTop()
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement()
     const colEndingWithoutFreeSpace = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight()
     for (let i = this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom(); i >= 0; i--) {
       for (let j = colEndingWithoutFreeSpace; j >= 0; j--) {
-        if (col + j + 1 < this.width && row + i < this.height && "." === auxBoard[row + i][col + j + 1] && this.fallingElement.shapeMatrix[i][j] !== '.') {
-          auxBoard[row + i][col + j + 1] = this.fallingElement.shapeMatrix[i][j];
+        if (col + j + 1 < this.width && rowWithoutTopDots + i < this.height && "." === auxBoard[rowWithoutTopDots + i][col + j + 1] && this.fallingElement.shapeMatrix[i][j] !== '.') {
+          auxBoard[rowWithoutTopDots + i][col + j + 1] = this.fallingElement.shapeMatrix[i][j];
         }
       }
     }
