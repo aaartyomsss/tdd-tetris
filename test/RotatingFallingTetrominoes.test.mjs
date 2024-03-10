@@ -351,4 +351,34 @@ describe("Wall bounce is implemented", () => {
        .......I..`
     );
   })
+
+  test("T cannot be bounced from the in case of occupied place from the left", () => {
+    board.drop(Tetromino.I_SHAPE)
+    board.rotateLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.tick()
+    board.tick()
+    board.tick()
+    board.drop(Tetromino.T_SHAPE)
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.rotateRight()
+    board.moveLeft()
+    board.tick()
+    board.tick()
+    board.rotateLeft()
+
+    console.log(board.toString())
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       T.I.......
+       TTI.......
+       T.I.......
+       ..I.......`
+    );
+  })
 })
