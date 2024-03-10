@@ -222,17 +222,16 @@ export class Board {
     const [col, row] = this.fallingElementTopLeftIndex;
     if (col + this.fallingElement.freeColsFromLeft() === 0) return;
     if (!this.isUpcomingHeightFree(-1)) return;
+    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement()
     for (let i = 0; i < this.fallingElement.height; i++) {
       for (let j = 0; j < this.fallingElement.width; j++) {
-        if (col + j - 1 >= 0 && "." === this.boardMatrix[row + i][col + j - 1]) {
-          this.boardMatrix[row + i][col + j - 1] = this.fallingElement.shapeMatrix[i][j];
-        }
-        if (col + j >= 0) {
-          this.boardMatrix[row + i][col + j] = ".";
+        if (col + j - 1 >= 0 && "." === auxBoard[row + i][col + j - 1]) {
+          auxBoard[row + i][col + j - 1] = this.fallingElement.shapeMatrix[i][j];
         }
       }
     }
     this.fallingElementTopLeftIndex = [col - 1, row];
+    this.boardMatrix = auxBoard
   }
 
   moveDown() {
