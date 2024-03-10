@@ -1,11 +1,13 @@
 const SHAPE_TYPES = {
     T: 'T',
     I: 'I',
-    O: 'O'
+    O: 'O',
+    T_ARIKA_SHAPE: 'T_ARIKA_SHAPE'
 }
 
 export class Tetromino {
     shapeType;
+    currentOrientation
 
     static get T_SHAPE() {
         return new Tetromino(`.T.
@@ -30,16 +32,17 @@ export class Tetromino {
         return new Tetromino(`....
                               TTT.
                               .T..
-                              ....`, SHAPE_TYPES.O)
+                              ....`, SHAPE_TYPES.T_ARIKA_SHAPE)
     }
 
-    constructor(shape, shapeType) {
+    constructor(shape, shapeType, currentOriantation = 0) {
         const rows = shape.replaceAll(" ", '')
                           .split('\n')
         this.height = rows.length
         this.width = rows[0].length
         this.shapeMatrix = rows.map(row => row.split(""));
         this.shapeType = shapeType
+        this.currentOriantation = currentOriantation
     }
 
     rotateShapeI() {
@@ -61,6 +64,7 @@ export class Tetromino {
                               .OO
                               ...`, SHAPE_TYPES.O)
     }
+    rotateTArikaShape() {}   
 
     rotateRight() {
         if (this.shapeType === SHAPE_TYPES.I) {
@@ -68,6 +72,9 @@ export class Tetromino {
         } 
         if (this.shapeType === SHAPE_TYPES.O) {
             return this.returnNewOShapeOnRotation()
+        }
+        if (this.shapeType === SHAPE_TYPES.T_ARIKA_SHAPE) {
+            return this.rotateTArikaShape()
         }
         let a = JSON.parse(JSON.stringify(this.shapeMatrix))
         for (let i = 0; i < parseInt(this.height / 2); i++) {
