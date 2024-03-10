@@ -87,6 +87,15 @@ describe("The Arika T shape", () => {
     );
   });
 
+  test("can be rotated right/clockwise three times", () => {
+    expect(shape.rotateRight().rotateRight().rotateRight().toString()).to.equalShape(
+      `.T..
+       .TT.
+       .T..
+       ....`
+    );
+  });
+
   test.skip("can be rotated left/counter-clockwise", () => {
     expect(shape.rotateLeft().toString()).to.equalShape(
       `.T.
