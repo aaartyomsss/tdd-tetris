@@ -2,18 +2,11 @@ const SHAPE_TYPES = {
     T: 'T',
     I: 'I',
     O: 'O',
-    T_ARIKA_SHAPE: 'T_ARIKA_SHAPE'
 }
 
 export class Tetromino {
     shapeType;
     currentOrientation
-
-    static get T_SHAPE() {
-        return new Tetromino(`.T.
-                              TTT
-                              ...`, SHAPE_TYPES.T)
-    }
 
     static get I_SHAPE() {
         return new Tetromino(`....
@@ -28,11 +21,11 @@ export class Tetromino {
                               ...`, SHAPE_TYPES.O)
     }
 
-    static get T_ARIKA_SHAPE() {
+    static get T_SHAPE() {
         return new Tetromino(`....
                               TTT.
                               .T..
-                              ....`, SHAPE_TYPES.T_ARIKA_SHAPE)
+                              ....`, SHAPE_TYPES.T)
     }
 
     constructor(shape, shapeType, currentOriantation = 0) {
@@ -76,22 +69,22 @@ export class Tetromino {
             return new Tetromino(`.T..
                                   TT..
                                   .T..
-                                  ....`, SHAPE_TYPES.T_ARIKA_SHAPE, 1)
+                                  ....`, SHAPE_TYPES.T, 1)
         } else if (toDirection === 2) {
             return new Tetromino(`....
                                   .T..
                                   TTT.
-                                  ....`, SHAPE_TYPES.T_ARIKA_SHAPE, 2)
+                                  ....`, SHAPE_TYPES.T, 2)
         } else if (toDirection === 3) {
             return new Tetromino(`.T..
                                   .TT.
                                   .T..
-                                  ....`, SHAPE_TYPES.T_ARIKA_SHAPE, 3)
+                                  ....`, SHAPE_TYPES.T, 3)
         } else if (toDirection === 0) {
             return new Tetromino(`....
                                   TTT.
                                   .T..
-                                  ....`, SHAPE_TYPES.T_ARIKA_SHAPE, 0)
+                                  ....`, SHAPE_TYPES.T, 0)
         }
     }   
 
@@ -102,7 +95,7 @@ export class Tetromino {
         if (this.shapeType === SHAPE_TYPES.O) {
             return this.returnNewOShapeOnRotation()
         }
-        if (this.shapeType === SHAPE_TYPES.T_ARIKA_SHAPE) {
+        if (this.shapeType === SHAPE_TYPES.T) {
             return this.rotateTArikaShape(1)
         }
         let a = JSON.parse(JSON.stringify(this.shapeMatrix))

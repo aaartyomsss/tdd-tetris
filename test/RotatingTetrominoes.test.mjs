@@ -16,49 +16,8 @@ function distinctOrientations(shape) {
   return distinct;
 }
 
-describe("The T shape", () => {
-  const shape = Tetromino.T_SHAPE;
-
-  test("initial orientation", () => {
-    expect(shape.toString()).to.equalShape(
-      `.T.
-       TTT
-       ...`
-    );
-  });
-
-  test("can be rotated right/clockwise", () => {
-    expect(shape.rotateRight().toString()).to.equalShape(
-      `.T.
-       .TT
-       .T.`
-    );
-  });
-
-  test("can be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
-      `.T.
-       TT.
-       .T.`
-    );
-  });
-
-  test("Returns how cols from the left are free", () => {
-    expect(shape.rotateRight().freeColsFromLeft()).to.equal(1);
-  });
-
-  test("Returns how cols from the right are free", () => {
-    expect(shape.rotateLeft().freeColsFromRight()).to.equal(1);
-    expect(shape.rotateRight().freeColsFromRight()).to.equal(0);
-  });
-
-  test("has 4 distinct orientations", () => {
-    expect(distinctOrientations(shape).size).to.equal(4);
-  });
-});
-
 describe("The Arika T shape", () => {
-  const shape = Tetromino.T_ARIKA_SHAPE;
+  const shape = Tetromino.T_SHAPE;
 
   test("initial orientation", () => {
     expect(shape.toString()).to.equalShape(
