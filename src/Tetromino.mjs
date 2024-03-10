@@ -14,11 +14,10 @@ export class Tetromino {
     }
 
     static get I_SHAPE() {
-        return new Tetromino(`.....
-                              .....
-                              IIII.
-                              .....
-                              .....`, SHAPE_TYPES.I)
+        return new Tetromino(`....
+                              IIII
+                              ....
+                              ....`, SHAPE_TYPES.I)
     }
 
     static get O_SHAPE() {
@@ -37,18 +36,16 @@ export class Tetromino {
     }
 
     rotateShapeI() {
-        if (this.shapeMatrix[2][0] === 'I') {
-            return new Tetromino(`..I..
-                                  ..I..
-                                  ..I..
-                                  ..I..
-                                  .....`, SHAPE_TYPES.I)
+        if (this.shapeMatrix[1][0] === 'I') {
+            return new Tetromino(`..I.
+                                  ..I.
+                                  ..I.
+                                  ..I.`, SHAPE_TYPES.I)
         } else {
-            return new Tetromino(`.....
-                                  .....
-                                  IIII.
-                                  .....
-                                  .....`, SHAPE_TYPES.I)
+            return new Tetromino(`....
+                                  IIII
+                                  ....
+                                  ....`, SHAPE_TYPES.I)
         }
     }
 
