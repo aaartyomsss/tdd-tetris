@@ -114,16 +114,16 @@ describe("The Arika T shape", () => {
     );
   });
 
-  test.skip("Returns how cols from the left are free", () => {
-    expect(shape.rotateRight().freeColsFromLeft()).to.equal(1);
+  test("Returns how cols from the left are free", () => {
+    expect(shape.rotateRight().freeColsFromLeft()).to.equal(0);
   });
 
-  test.skip("Returns how cols from the right are free", () => {
+  test("Returns how cols from the right are free", () => {
     expect(shape.rotateLeft().freeColsFromRight()).to.equal(1);
-    expect(shape.rotateRight().freeColsFromRight()).to.equal(0);
+    expect(shape.rotateRight().freeColsFromRight()).to.equal(2);
   });
 
-  test.skip("has 4 distinct orientations", () => {
+  test("has 4 distinct orientations", () => {
     expect(distinctOrientations(shape).size).to.equal(4);
   });
 });
