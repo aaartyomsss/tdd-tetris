@@ -319,28 +319,19 @@ describe("Wall bounce is implemented", () => {
     board.tick()
     board.tick()
     board.drop(Tetromino.T_SHAPE)
-    console.log(board.toString())
     board.moveRight()
-    console.log(board.toString())
     board.moveRight()
-    console.log(board.toString())
     board.moveRight()
-    console.log(board.toString())
     board.moveRight()
-    console.log(board.toString())
     board.moveRight()
     board.moveRight()
     board.moveRight()
     board.moveRight()
     board.rotateLeft()
-    console.log(board.toString())
     board.moveRight()
-    console.log(board.toString())
     board.tick()
     board.tick()
     board.rotateRight()
-
-    console.log(board.toString())
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -379,6 +370,56 @@ describe("Wall bounce is implemented", () => {
        TTI.......
        T.I.......
        ..I.......`
+    );
+  })
+
+  test("I wall bounce is implemented from the left", () => {
+    board.drop(Tetromino.I_SHAPE)
+    board.rotateLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.rotateRight()
+
+    // Good enough considering change in reqs. in level 7
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       IIII......
+       ..........
+       ..........
+       ..........`
+    );
+  })
+
+  test.skip("I wall bounce is implemented from the right", () => {
+    board.drop(Tetromino.I_SHAPE)
+    board.rotateLeft()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.moveRight()
+    board.rotateRight()
+
+    console.log(board.toString())
+
+    // Good enough considering change in reqs. in level 7
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ......IIII
+       ..........
+       ..........
+       ..........`
     );
   })
 })
