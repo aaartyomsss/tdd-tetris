@@ -16,8 +16,6 @@ describe("Some board specific functions", () => {
     board.drop(Tetromino.T_SHAPE);
     const aux = board.createAuxBoardWithoutCurrentlyFallingElement();
 
-    console.log(aux);
-
     expect(aux).to.toStrictEqual([
       [".", ".", ".", ".", ".", ".", ".", ".", ".", "."],
       [".", ".", ".", ".", ".", ".", ".", ".", ".", "."],

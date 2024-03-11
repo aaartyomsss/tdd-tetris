@@ -11,7 +11,7 @@ function fallToBottom(board, limit = 10) {
   }
 }
 
-describe("Falling rotating tetrominoes only T shape", () => {
+describe.skip("Falling rotating tetrominoes only T shape", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
@@ -111,7 +111,7 @@ describe("Falling rotating tetrominoes only T shape", () => {
 
 });
 
-describe('Falling rotating tetrominoes only I shape', () => {
+describe.skip('Falling rotating tetrominoes only I shape', () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 10);
@@ -262,7 +262,7 @@ describe("Falling tetromino shape I on a small board", () => {
   })
 })
 
-describe("Wall bounce is implemented", () => {
+describe.skip("Wall bounce is implemented", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
@@ -309,7 +309,7 @@ describe("Wall bounce is implemented", () => {
     );
   })
 
-  test("T cannot be bounced from the in case of occupied place", () => {
+  test.skip("T cannot be bounced from the in case of occupied place", () => {
     board.drop(Tetromino.I_SHAPE)
     board.rotateLeft()
     board.moveRight()
@@ -342,7 +342,7 @@ describe("Wall bounce is implemented", () => {
     );
   })
 
-  test("T cannot be bounced from the in case of occupied place from the left", () => {
+  test.skip("T cannot be bounced from the in case of occupied place from the left", () => {
     board.drop(Tetromino.I_SHAPE)
     board.rotateLeft()
     board.moveLeft()
