@@ -127,9 +127,9 @@ describe("Falling tetrominoes", () => {
 
     expect(board.toString()).to.equalShape(
       `..........
-       ..........
        ...TTT....
        ....T.....
+       ..........
        ..........
        ..........`
     );
@@ -225,44 +225,18 @@ describe("Falling tetrominoes", () => {
 
   test("it cannot be moved right through other shapes", () => {
     board.drop(Tetromino.T_SHAPE);
-    console.log("1: ")
-    console.log(board.toString())
     board.moveRight()
-    console.log("2: ")
-    console.log(board.toString())
     board.moveRight()
-    console.log("3: ")
-    console.log(board.toString())
     board.moveRight()
-    console.log("4: ")
-    console.log(board.toString())
     board.moveRight()
-    console.log("5: ")
-    console.log(board.toString())
     fallToBottom(board)
-    console.log("6: ")
-    console.log(board.toString())
     board.drop(Tetromino.T_SHAPE);
-    console.log("7: ")
-    console.log(board.toString())
     fallToBottom(board, 4)
-    console.log("8: ")
-    console.log(board.toString())
     board.moveRight()
-    console.log("9: ")
-    console.log(board.toString())
     board.moveRight()
-    console.log("10: ")
-    console.log(board.toString())
     board.moveRight()
-    console.log("11: ")
-    console.log(board.toString())
     board.moveRight()
-    console.log("12: ")
-    console.log(board.toString())
     board.moveRight()
-    console.log("13: ")
-    console.log(board.toString())
 
 
     expect(board.toString()).to.equalShape(
