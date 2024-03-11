@@ -117,7 +117,7 @@ export class Board {
 
   isHeightFree(col, colStart, height) {
     for (let i = colStart; i <= colStart + height - 1; i++) {
-      if (this.boardMatrix[i][col] !== ".") return false;
+      if (i > 0 && this.boardMatrix[i][col] !== ".") return false;
     }
     return true;
   }
@@ -126,7 +126,7 @@ export class Board {
     const [col, row] = this.fallingElementTopLeftIndex;
     const elementHeightWithoutBottomDots = this.fallingElement.height - this.fallingElement.freeRowsFromBottom();
     if (colDirection === 1) {
-      return this.isHeightFree(col + this.fallingElement.width - this.fallingElement.freeColsFromRight(), row, elementHeightWithoutBottomDots);
+      return this.isHeightFree(col + this.fallingElement.width - this.fallingElement.freeColsFromRight(), row - this.fallingElement.freeRowsFromTop(), elementHeightWithoutBottomDots);
     } else if (colDirection === -1) {
       return this.isHeightFree(col + this.fallingElement.freeColsFromLeft() - 1, row, elementHeightWithoutBottomDots);
     }
@@ -208,8 +208,9 @@ export class Board {
     const rowWithoutTopDots = row - this.fallingElement.freeRowsFromTop()
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement()
     const colEndingWithoutFreeSpace = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight()
-    for (let i = this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom(); i >= 0; i--) {
+    for (let i = 0; i < this.fallingElement.height; i++) {
       for (let j = colEndingWithoutFreeSpace; j >= 0; j--) {
+        if (rowWithoutTopDots + i < 0) continue
         if (col + j + 1 < this.width && rowWithoutTopDots + i < this.height && "." === auxBoard[rowWithoutTopDots + i][col + j + 1] && this.fallingElement.shapeMatrix[i][j] !== '.') {
           auxBoard[rowWithoutTopDots + i][col + j + 1] = this.fallingElement.shapeMatrix[i][j];
         }
@@ -224,11 +225,13 @@ export class Board {
     const [col, row] = this.fallingElementTopLeftIndex;
     if (col + this.fallingElement.freeColsFromLeft() === 0) return;
     if (!this.isUpcomingHeightFree(-1)) return;
+    const rowWithoutTopDots = row - this.fallingElement.freeRowsFromTop()
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement()
     for (let i = 0; i < this.fallingElement.height; i++) {
       for (let j = 0; j < this.fallingElement.width; j++) {
-        if (col + j - 1 >= 0 && "." === auxBoard[row + i][col + j - 1]) {
-          auxBoard[row + i][col + j - 1] = this.fallingElement.shapeMatrix[i][j];
+        if (rowWithoutTopDots + i < 0) continue
+        if (col + j - 1 >= 0 && "." === auxBoard[rowWithoutTopDots + i][col + j - 1]) {
+          auxBoard[rowWithoutTopDots + i][col + j - 1] = this.fallingElement.shapeMatrix[i][j];
         }
       }
     }
@@ -237,7 +240,7 @@ export class Board {
   }
 
   moveDown() {
-    this.moveTetromino();
+    this.tick();
   }
 
   toString() {
