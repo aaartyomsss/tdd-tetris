@@ -146,26 +146,28 @@ export class Board {
   #moveTetromino(row, col) {
     const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight();
     const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft();
+    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement()
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
-        if (row + i < 0) continue;
-        if (row + i + 1 < this.height && "." === this.boardMatrix[row + i + 1][col + j]) {
-          this.boardMatrix[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j];
-        }
-        if (row + i < this.height) {
-          this.boardMatrix[row + i][col + j] = ".";
+        if (row + i < 0 || row + i + 1 >= this.height) continue;
+        if (row + i + 1 < this.height && "." === auxBoard[row + i + 1][col + j] && this.fallingElement.shapeMatrix[i][j] !== '.') {
+          auxBoard[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j];
         }
       }
     }
+    this.boardMatrix = auxBoard
   }
 
   #checkMoveTetromino(row, col) {
-    const upcomingRow = row + 1 + this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom();
     const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight();
     const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft();
-    for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
-      if (upcomingRow < this.height && "." !== this.boardMatrix[upcomingRow][col + j]) {
-        return false;
+    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement()
+    for (let i = this.fallingElement.height - this.fallingElement.freeRowsFromBottom() - 1; i >= 0; i--) {
+      for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
+        if (row + i < 0 || row + i + 1 >= this.height) continue;
+        if ("." !== auxBoard[row + i + 1][col + j] && this.fallingElement.shapeMatrix[i][j] !== '.') {
+          return false
+        }
       }
     }
     return true;

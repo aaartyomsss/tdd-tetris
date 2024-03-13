@@ -249,7 +249,7 @@ describe("Falling tetrominoes", () => {
     );
   })
 
-  test.skip("tetrominos can be stacked on top of each other with not equal column indexing", () => {
+  test("tetrominos can be stacked on top of each other with not equal column indexing", () => {
     board.drop(Tetromino.T_SHAPE);
     board.moveRight()
     fallToBottom(board)
@@ -257,14 +257,13 @@ describe("Falling tetrominoes", () => {
     board.moveLeft()
     fallToBottom(board)
 
-
     expect(board.toString()).to.equalShape(
       `..........
        ..........
        ..........
-       ...T......
-       ..TTTT....
-       ....TTT...`
+       ..TTT.....
+       ...TTTT...
+       .....T....`
     );
   })
   
