@@ -110,7 +110,7 @@ describe("Falling rotating tetrominoes only T shape", () => {
 
 });
 
-describe.skip('Falling rotating tetrominoes only I shape', () => {
+describe('Falling rotating tetrominoes only I shape', () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 10);
