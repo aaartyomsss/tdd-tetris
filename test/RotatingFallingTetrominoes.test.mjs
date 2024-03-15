@@ -23,10 +23,25 @@ describe("Falling rotating tetrominoes only T shape", () => {
     board.rotateRight()
 
     expect(board.toString()).to.equalShape(
-      `..........
-       ....T.....
+      `....T.....
        ...TT.....
        ....T.....
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
+  test("I can be rotated on the board", () => {
+    board.drop(Tetromino.I_SHAPE);
+    board.tick()
+    board.rotateRight()
+
+    expect(board.toString()).to.equalShape(
+      `.....I....
+       .....I....
+       .....I....
+       .....I....
        ..........
        ..........`
     );
@@ -34,11 +49,13 @@ describe("Falling rotating tetrominoes only T shape", () => {
 
   test("Tetromino can stand side by side once rotated", () => {
     board.drop(Tetromino.T_SHAPE);
+    board.tick()
     board.rotateRight()
     board.moveLeft()
     board.moveLeft()
     fallToBottom(board)
     board.drop(Tetromino.T_SHAPE);
+    board.tick()
     board.rotateRight()
     fallToBottom(board)
 
@@ -54,14 +71,15 @@ describe("Falling rotating tetrominoes only T shape", () => {
 
   test("Tetromino can stand side by side once rotated in reverse order", () => {
     board.drop(Tetromino.T_SHAPE);
+    board.tick()
     board.rotateRight()
     fallToBottom(board)
     board.drop(Tetromino.T_SHAPE);
+    board.tick()
+    board.moveLeft()
+    board.moveLeft()
     board.rotateRight()
-    board.moveLeft()
-    board.moveLeft()
     fallToBottom(board)
-    
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -79,10 +97,10 @@ describe("Falling rotating tetrominoes only T shape", () => {
     board.rotateLeft()
 
     expect(board.toString()).to.equalShape(
-      `..........
-       ....T.....
+      `....T.....
        ....TT....
        ....T.....
+       ..........
        ..........
        ..........`
     );
@@ -90,11 +108,13 @@ describe("Falling rotating tetrominoes only T shape", () => {
 
   test("Tetromino can stand side by side once rotated to the left", () => {
     board.drop(Tetromino.T_SHAPE);
+    board.tick()
     board.rotateLeft()
     board.moveRight()
     board.moveRight()
     fallToBottom(board)
     board.drop(Tetromino.T_SHAPE);
+    board.tick()
     board.rotateLeft()
     fallToBottom(board)
 
@@ -118,9 +138,11 @@ describe('Falling rotating tetrominoes only I shape', () => {
 
   test("Tetrominos of shape I can stand side by side", () => {
     board.drop(Tetromino.I_SHAPE);
+    board.tick()
     board.rotateLeft()
     fallToBottom(board)
     board.drop(Tetromino.I_SHAPE);
+    board.tick()
     board.rotateLeft()
     board.moveRight()
     fallToBottom(board)
@@ -141,11 +163,13 @@ describe('Falling rotating tetrominoes only I shape', () => {
 
   test("Tetromino cannot be rotated if there is no space", () => {
     board.drop(Tetromino.I_SHAPE);
+    board.tick()
     board.rotateLeft()
     board.moveRight()
     board.moveRight()   
     fallToBottom(board)
     board.drop(Tetromino.I_SHAPE);
+    board.tick()
     board.rotateLeft()
     board.moveRight()
     board.moveRight()
@@ -169,11 +193,13 @@ describe('Falling rotating tetrominoes only I shape', () => {
 
   test("Tetromino cannot be rotated left if there is no space", () => {
     board.drop(Tetromino.I_SHAPE);
+    board.tick()
     board.rotateLeft()
     board.moveRight()
     board.moveRight()   
     fallToBottom(board)
     board.drop(Tetromino.I_SHAPE);
+    board.tick()
     board.rotateLeft()
     board.moveRight()
     board.moveRight()
@@ -205,6 +231,7 @@ describe("Falling tetromino shape I on a small board", () => {
 
   test("Shape I can be dropped when another I is standing vertically", () => {
     board.drop(Tetromino.I_SHAPE);
+    board.tick()
     board.rotateLeft()
     fallToBottom(board)
     board.drop(Tetromino.I_SHAPE)
@@ -221,6 +248,7 @@ describe("Falling tetromino shape I on a small board", () => {
 
   test("I can be pushed all the way to the left", () => {
     board.drop(Tetromino.I_SHAPE);
+    board.tick()
     board.rotateLeft()
     board.moveLeft()
     board.moveLeft()
@@ -241,6 +269,7 @@ describe("Falling tetromino shape I on a small board", () => {
 
   test("I can be pushed all the way to the right", () => {
     board.drop(Tetromino.I_SHAPE);
+    board.tick()
     board.rotateLeft()
     board.moveRight()
     board.moveRight()
@@ -261,25 +290,19 @@ describe("Falling tetromino shape I on a small board", () => {
   })
 })
 
-describe.skip("Wall bounce is implemented", () => {
+describe("Wall bounce is implemented", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
   });
 
-  test("T can be bounced from the left", () => {
+  test("T cannot be rotated right away", () => {
     board.drop(Tetromino.T_SHAPE)
-    board.rotateRight()
-    board.moveLeft()
-    board.moveLeft()
-    board.moveLeft()
-    board.moveLeft()
-    board.moveLeft()
     board.rotateLeft()
 
     expect(board.toString()).to.equalShape(
-      `.T........
-       TTT.......
+      `...TTT....
+       ....T.....
        ..........
        ..........
        ..........
@@ -287,8 +310,31 @@ describe.skip("Wall bounce is implemented", () => {
     );
   })
 
-  test("T can be bounced from the right", () => {
+  test.skip("T can be bounced from the left", () => {
     board.drop(Tetromino.T_SHAPE)
+    board.tick()
+    board.rotateRight()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.moveLeft()
+    board.rotateLeft()
+
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       TTT.......
+       .T........
+       ..........
+       ..........
+       ..........`
+    );
+  })
+
+  test.skip("T can be bounced from the right", () => {
+    board.drop(Tetromino.T_SHAPE)
+    board.tick()
     board.rotateLeft()
     board.moveRight()
     board.moveRight()
@@ -299,9 +345,9 @@ describe.skip("Wall bounce is implemented", () => {
     board.rotateRight()
 
     expect(board.toString()).to.equalShape(
-      `........T.
+      `..........
        .......TTT
-       ..........
+       ........T.
        ..........
        ..........
        ..........`
@@ -310,6 +356,7 @@ describe.skip("Wall bounce is implemented", () => {
 
   test.skip("T cannot be bounced from the in case of occupied place", () => {
     board.drop(Tetromino.I_SHAPE)
+    board.tick()
     board.rotateLeft()
     board.moveRight()
     board.moveRight()
@@ -343,6 +390,7 @@ describe.skip("Wall bounce is implemented", () => {
 
   test.skip("T cannot be bounced from the in case of occupied place from the left", () => {
     board.drop(Tetromino.I_SHAPE)
+    board.tick()
     board.rotateLeft()
     board.moveLeft()
     board.moveLeft()
@@ -360,8 +408,6 @@ describe.skip("Wall bounce is implemented", () => {
     board.tick()
     board.rotateLeft()
 
-    console.log(board.toString())
-
     expect(board.toString()).to.equalShape(
       `..........
        ..........
@@ -374,6 +420,7 @@ describe.skip("Wall bounce is implemented", () => {
 
   test("I wall bounce is implemented from the left", () => {
     board.drop(Tetromino.I_SHAPE)
+    board.tick()
     board.rotateLeft()
     board.moveLeft()
     board.moveLeft()
@@ -398,8 +445,8 @@ describe.skip("Wall bounce is implemented", () => {
 
   test("I wall bounce is implemented from the right", () => {
     board.drop(Tetromino.I_SHAPE)
+    board.tick()
     board.rotateLeft()
-    console.log(board.toString())
     board.moveRight()
     board.moveRight()
     board.moveRight()
@@ -409,8 +456,6 @@ describe.skip("Wall bounce is implemented", () => {
     board.moveRight()
     board.moveRight()
     board.rotateRight()
-
-    console.log(board.toString())
 
     expect(board.toString()).to.equalShape(
       `..........

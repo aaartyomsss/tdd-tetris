@@ -7,6 +7,7 @@ describe("Some board specific functions", () => {
     const board = new Board(10, 6);
 
     board.drop(Tetromino.T_SHAPE);
+    board.tick()
     board.rotateRight();
     board.tick();
     board.tick();
