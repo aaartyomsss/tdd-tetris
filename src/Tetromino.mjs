@@ -142,6 +142,11 @@ export class Tetromino {
                                   ZZ..
                                   .Z..
                                   ....`, SHAPE_TYPES.Z)
+        } else {
+            return new Tetromino(`....
+                                  .ZZ.
+                                  ZZ..
+                                  ....`, SHAPE_TYPES.Z)
         }
     }
 

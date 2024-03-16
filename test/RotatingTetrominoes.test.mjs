@@ -260,7 +260,7 @@ describe("Z shape", () => {
     );
   })
 
-  test.skip("Rotate right 2", () => {
+  test("Rotate right 2", () => {
     expect(shape.rotateRight().rotateRight().toString()).to.equalShape(
       `....
        .ZZ.
@@ -269,7 +269,7 @@ describe("Z shape", () => {
     );
   })
 
-  test.skip("Rotate right 3", () => {
+  test("Rotate right 3", () => {
     expect(shape.rotateRight().rotateRight().rotateRight().toString()).to.equalShape(
       `Z...
        ZZ..
@@ -278,7 +278,7 @@ describe("Z shape", () => {
     );
   })
 
-  test.skip("Rotate right full", () => {
+  test("Rotate right full", () => {
     expect(shape.rotateRight().rotateRight().rotateRight().rotateRight().toString()).to.equalShape(
       `....
       .ZZ.
