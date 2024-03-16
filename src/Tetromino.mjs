@@ -98,6 +98,13 @@ export class Tetromino {
         }
     }   
 
+    rotateL() {
+        return new Tetromino(`LL..
+                              .L..
+                              .L..
+                              ....`, SHAPE_TYPES.L)
+    }
+
     rotateRight() {
         if (this.shapeType === SHAPE_TYPES.I) {
             return this.rotateShapeI()
@@ -107,6 +114,9 @@ export class Tetromino {
         }
         if (this.shapeType === SHAPE_TYPES.T) {
             return this.rotateTArikaShape(1)
+        }
+        if (this.shapeType === SHAPE_TYPES.L) {
+            return this.rotateL()
         }
         let a = JSON.parse(JSON.stringify(this.shapeMatrix))
         for (let i = 0; i < parseInt(this.height / 2); i++) {
