@@ -5,7 +5,6 @@ import { Tetromino } from "../src/Tetromino.mjs";
 function tickTick(board, len = 5) {
     for (let i = 0; i < len; i++) {
         board.tick()
-        console.log(board.toString(), len)
     }
 }
 
@@ -42,6 +41,31 @@ describe("Clearing Lines", () => {
          ........
          ........
          ........`
+        );
+    })
+
+    test("Last 2 rows are cleared at the same time", () => {
+        const board = new Board(4, 6)
+        board.drop(Tetromino.O_SHAPE)
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        tickTick(board, 6)
+        board.drop(Tetromino.O_SHAPE)
+        board.moveRight()
+        board.moveRight()
+        board.moveRight()
+        tickTick(board, 6)
+
+        console.log(board.toString())
+
+        expect(board.toString()).to.equalShape(
+        `....
+         ....
+         ....
+         ....
+         ....
+         ....`
         );
     })
 

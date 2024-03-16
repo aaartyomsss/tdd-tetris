@@ -194,6 +194,7 @@ export class Board {
       !this.#checkMoveTetromino(startingRow, col) ||
       startingRow + this.fallingElement.height - this.fallingElement.freeRowsFromBottom() === this.height
     ) {
+      this.clearingLinesAlgo()
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
       return;
@@ -206,6 +207,7 @@ export class Board {
     if (!this.fallingElementTopLeftIndex) return;
     const [col, row] = this.fallingElementTopLeftIndex;
     if (row + 1 === this.height || (this.boardMatrix[row + 1][col] !== "." && !this.fallingElement.width)) {
+      this.clearingLinesAlgo()
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
       return;
@@ -216,7 +218,6 @@ export class Board {
       this.fallingElementTopLeftIndex = [col, row + 1];
     } else {
       this.moveTetromino();
-      this.clearLine(this.height - 1)
     }
   }
 
@@ -266,6 +267,12 @@ export class Board {
 
   moveDown() {
     this.tick();
+  }
+
+  clearingLinesAlgo() {
+    for (let row = this.height - 1; row > 0; row--) {
+      this.clearLine(row)
+    }
   }
 
   clearLine(row) {
