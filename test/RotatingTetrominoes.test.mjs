@@ -224,4 +224,13 @@ describe("L shape", () => {
        ....`
     );
   })
+
+  test("Rotate left", () => {
+    expect(shape.rotateLeft().toString()).to.equalShape(
+      `.L..
+       .L..
+       .LL.
+       ....`
+    );
+  })
 })
