@@ -268,7 +268,7 @@ export class Board {
   }
 
   checkForLineClear() {
-    const rowFilled = true
+    let rowFilled = true
     for (let i = 0; i < this.width; i++) {
       if (this.boardMatrix[this.height - 1][i] === '.') {
         rowFilled = false

@@ -25,6 +25,17 @@ describe("Clearing Lines", () => {
         expect(board.checkForLineClear()).toBe(true)
     })
 
+    test("Row is not ready to be cleared", () => {
+        const board = new Board(8, 6)
+        board.drop(Tetromino.I_SHAPE)
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        tickTick(board, 6)
+        
+        expect(board.checkForLineClear()).toBe(false)
+    })
+
     test.skip("Row is cleared", () => {
         const board = new Board(8, 6)
         board.drop(Tetromino.I_SHAPE)

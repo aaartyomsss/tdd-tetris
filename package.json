@@ -17,6 +17,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^1.4.0",
     "chai": "^4.3.10",
     "http-server": "^14.1.1",
     "prettier": "^3.1.1",
@@ -31,6 +32,7 @@
   "scripts": {
     "start": "http-server src -o / -c-1",
     "test": "vitest run",
+    "coverage": "vitest run --coverage",
     "autotest": "vitest watch",
     "format": "prettier --write .",
     "lint": "tsc"
