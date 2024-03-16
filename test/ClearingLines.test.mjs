@@ -69,5 +69,41 @@ describe("Clearing Lines", () => {
         );
     })
 
+    test("Last 4 rows are cleared at the same time", () => {
+        const board = new Board(4, 6)
+        board.drop(Tetromino.I_SHAPE)
+        board.tick()
+        board.rotateLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        tickTick(board, 6)
+        board.drop(Tetromino.I_SHAPE)
+        board.tick()
+        board.rotateLeft()
+        board.moveRight()
+        board.moveRight()
+        board.moveRight()
+        tickTick(board, 6)
+        board.drop(Tetromino.I_SHAPE)
+        board.tick()
+        board.rotateLeft()
+        board.moveLeft()
+        tickTick(board, 6)
+        board.drop(Tetromino.I_SHAPE)
+        board.tick()
+        board.rotateLeft()
+        tickTick(board, 6)
+
+        expect(board.toString()).to.equalShape(
+        `....
+         ....
+         ....
+         ....
+         ....
+         ....`
+        );
+    })
+
     
 })
