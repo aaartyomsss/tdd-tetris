@@ -69,10 +69,10 @@ export class Board {
       startingCol = this.width - maybeNewElement.width + maybeNewElement.freeColsFromRight();
     }
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement();
-
+    
     if (row - this.fallingElement.freeRowsFromTop() < 0) return false
     for (let i = this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom(); i >= 0; i--) {
-      for (let j = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight(); j >= 0; j--) {
+      for (let j = this.fallingElement.width - 1 - maybeNewElement.freeColsFromRight(); j >= 0; j--) {
         if (row - this.fallingElement.freeRowsFromTop() + i >= this.height || startingCol + j >= this.width) {
           return false;
         }
@@ -134,7 +134,7 @@ export class Board {
         elementHeightWithoutBottomDots
       );
     } else if (colDirection === -1) {
-      return this.isHeightFree(col + this.fallingElement.freeColsFromLeft() - 1, row, elementHeightWithoutBottomDots);
+      return this.isHeightFree(col + this.fallingElement.freeColsFromLeft() - 1, row - this.fallingElement.freeRowsFromTop(), elementHeightWithoutBottomDots);
     }
   }
 

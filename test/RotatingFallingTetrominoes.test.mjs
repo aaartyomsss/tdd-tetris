@@ -293,7 +293,7 @@ describe("Falling tetromino shape I on a small board", () => {
 describe("Wall bounce is implemented", () => {
   let board;
   beforeEach(() => {
-    board = new Board(10, 6);
+    board = new Board(10, 7);
   });
 
   test("T cannot be rotated right away", () => {
@@ -306,11 +306,12 @@ describe("Wall bounce is implemented", () => {
        ..........
        ..........
        ..........
+       ..........
        ..........`
     );
   })
 
-  test.skip("T can be bounced from the left", () => {
+  test("T can be bounced from the left", () => {
     board.drop(Tetromino.T_SHAPE)
     board.tick()
     board.rotateRight()
@@ -328,11 +329,12 @@ describe("Wall bounce is implemented", () => {
        .T........
        ..........
        ..........
+       ..........
        ..........`
     );
   })
 
-  test.skip("T can be bounced from the right", () => {
+  test("T can be bounced from the right", () => {
     board.drop(Tetromino.T_SHAPE)
     board.tick()
     board.rotateLeft()
@@ -350,11 +352,12 @@ describe("Wall bounce is implemented", () => {
        ........T.
        ..........
        ..........
+       ..........
        ..........`
     );
   })
 
-  test.skip("T cannot be bounced from the in case of occupied place", () => {
+  test("T cannot be bounced from the in case of occupied place", () => {
     board.drop(Tetromino.I_SHAPE)
     board.tick()
     board.rotateLeft()
@@ -363,7 +366,9 @@ describe("Wall bounce is implemented", () => {
     board.tick()
     board.tick()
     board.tick()
+    board.tick()
     board.drop(Tetromino.T_SHAPE)
+    board.tick()
     board.moveRight()
     board.moveRight()
     board.moveRight()
@@ -376,19 +381,21 @@ describe("Wall bounce is implemented", () => {
     board.moveRight()
     board.tick()
     board.tick()
+    board.tick()
     board.rotateRight()
 
     expect(board.toString()).to.equalShape(
       `..........
        ..........
-       .......I.T
+       ..........
+       .......IT.
        .......ITT
-       .......I.T
+       .......IT.
        .......I..`
     );
   })
 
-  test.skip("T cannot be bounced from the in case of occupied place from the left", () => {
+  test("T cannot be bounced from the in case of occupied place from the left", () => {
     board.drop(Tetromino.I_SHAPE)
     board.tick()
     board.rotateLeft()
@@ -398,7 +405,9 @@ describe("Wall bounce is implemented", () => {
     board.tick()
     board.tick()
     board.tick()
+    board.tick()
     board.drop(Tetromino.T_SHAPE)
+    board.tick()
     board.moveLeft()
     board.moveLeft()
     board.moveLeft()
@@ -406,14 +415,16 @@ describe("Wall bounce is implemented", () => {
     board.moveLeft()
     board.tick()
     board.tick()
+    board.tick()
     board.rotateLeft()
 
     expect(board.toString()).to.equalShape(
       `..........
        ..........
-       T.I.......
+       ..........
+       .TI.......
        TTI.......
-       T.I.......
+       .TI.......
        ..I.......`
     );
   })
@@ -439,6 +450,7 @@ describe("Wall bounce is implemented", () => {
        ..........
        ..........
        ..........
+       ..........
        ..........`
     );
   })
@@ -460,6 +472,7 @@ describe("Wall bounce is implemented", () => {
     expect(board.toString()).to.equalShape(
       `..........
        ......IIII
+       ..........
        ..........
        ..........
        ..........
