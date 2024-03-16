@@ -177,3 +177,15 @@ describe("The O shape", () => {
   });
 });
 
+describe("L shape", () => {
+  const shape = Tetromino.L_SHAPE;
+
+  test("initial orientation", () => {
+    expect(shape.toString()).to.equalShape(
+      `....
+       LLL.
+       L...
+       ....`
+    );
+  });
+})
