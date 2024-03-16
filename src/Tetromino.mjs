@@ -109,7 +109,12 @@ export class Tetromino {
             return new Tetromino(`LL..
                                  .L..
                                  .L..
-                                 ....`, SHAPE_TYPES.L)
+                                 ....`, SHAPE_TYPES.L, 1)
+        } else if (toDirection === 2) {
+            return new Tetromino(`....
+                                  ..L.
+                                  LLL.
+                                  ....`, SHAPE_TYPES.L, 2)
         }
     }
 
