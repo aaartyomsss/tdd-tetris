@@ -120,6 +120,11 @@ export class Tetromino {
                                   .L..
                                   .LL.
                                   ....`, SHAPE_TYPES.L, 3)
+        } else if (toDirection === 0) {
+            return new Tetromino(`....
+                                  LLL.
+                                  L...
+                                  ....`, SHAPE_TYPES.L, 0)
         }
     }
 
