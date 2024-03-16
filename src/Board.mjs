@@ -69,14 +69,17 @@ export class Board {
       startingCol = this.width - maybeNewElement.width + maybeNewElement.freeColsFromRight();
     }
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement();
-    
-    if (row - this.fallingElement.freeRowsFromTop() < 0) return false
+
+    if (row - this.fallingElement.freeRowsFromTop() < 0) return false;
     for (let i = this.fallingElement.height - 1 - this.fallingElement.freeRowsFromBottom(); i >= 0; i--) {
       for (let j = this.fallingElement.width - 1 - maybeNewElement.freeColsFromRight(); j >= 0; j--) {
         if (row - this.fallingElement.freeRowsFromTop() + i >= this.height || startingCol + j >= this.width) {
           return false;
         }
-        if (maybeNewElement.shapeMatrix[i][j] !== "." && auxBoard[row - this.fallingElement.freeRowsFromTop() + i][startingCol + j] !== ".") {
+        if (
+          maybeNewElement.shapeMatrix[i][j] !== "." &&
+          auxBoard[row - this.fallingElement.freeRowsFromTop() + i][startingCol + j] !== "."
+        ) {
           return false;
         }
       }
@@ -134,7 +137,11 @@ export class Board {
         elementHeightWithoutBottomDots
       );
     } else if (colDirection === -1) {
-      return this.isHeightFree(col + this.fallingElement.freeColsFromLeft() - 1, row - this.fallingElement.freeRowsFromTop(), elementHeightWithoutBottomDots);
+      return this.isHeightFree(
+        col + this.fallingElement.freeColsFromLeft() - 1,
+        row - this.fallingElement.freeRowsFromTop(),
+        elementHeightWithoutBottomDots
+      );
     }
   }
 
@@ -148,27 +155,31 @@ export class Board {
   #moveTetromino(row, col) {
     const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight();
     const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft();
-    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement()
+    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement();
     for (let i = this.fallingElement.height - 1; i >= 0; i--) {
       for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
         if (row + i < 0 || row + i + 1 >= this.height) continue;
-        if (row + i + 1 < this.height && "." === auxBoard[row + i + 1][col + j] && this.fallingElement.shapeMatrix[i][j] !== '.') {
+        if (
+          row + i + 1 < this.height &&
+          "." === auxBoard[row + i + 1][col + j] &&
+          this.fallingElement.shapeMatrix[i][j] !== "."
+        ) {
           auxBoard[row + i + 1][col + j] = this.fallingElement.shapeMatrix[i][j];
         }
       }
     }
-    this.boardMatrix = auxBoard
+    this.boardMatrix = auxBoard;
   }
 
   #checkMoveTetromino(row, col) {
     const startingIndexOfTheColumn = this.fallingElement.width - 1 - this.fallingElement.freeColsFromRight();
     const endingIndexOfTheColumn = this.fallingElement.freeColsFromLeft();
-    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement()
+    const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement();
     for (let i = this.fallingElement.height - this.fallingElement.freeRowsFromBottom() - 1; i >= 0; i--) {
       for (let j = startingIndexOfTheColumn; j >= endingIndexOfTheColumn; j--) {
         if (row + i < 0 || row + i + 1 >= this.height) continue;
-        if ("." !== auxBoard[row + i + 1][col + j] && this.fallingElement.shapeMatrix[i][j] !== '.') {
-          return false
+        if ("." !== auxBoard[row + i + 1][col + j] && this.fallingElement.shapeMatrix[i][j] !== ".") {
+          return false;
         }
       }
     }
