@@ -16,9 +16,10 @@ export class Tetromino {
     }
 
     static get O_SHAPE() {
-        return new Tetromino(`.OO
-                              .OO
-                              ...`, SHAPE_TYPES.O)
+        return new Tetromino(`....
+                              .OO.
+                              .OO.
+                              ....`, SHAPE_TYPES.O)
     }
 
     static get T_SHAPE() {
@@ -53,9 +54,10 @@ export class Tetromino {
     }
 
     returnNewOShapeOnRotation() {
-        return new Tetromino(`.OO
-                              .OO
-                              ...`, SHAPE_TYPES.O)
+        return new Tetromino(`....
+                              .OO.
+                              .OO.
+                              ....`, SHAPE_TYPES.O)
     }
 
     rotateTArikaShape(direction) {
