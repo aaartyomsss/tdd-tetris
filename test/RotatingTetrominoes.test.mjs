@@ -251,7 +251,7 @@ describe("Z shape", () => {
     );
   });
 
-  test.skip("Rotate right", () => {
+  test("Rotate right", () => {
     expect(shape.rotateRight().toString()).to.equalShape(
       `Z...
        ZZ..
