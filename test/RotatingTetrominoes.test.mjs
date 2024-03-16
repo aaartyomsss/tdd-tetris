@@ -287,7 +287,7 @@ describe("Z shape", () => {
     );
   })
 
-  test.skip("Rotate left", () => {
+  test("Rotate left", () => {
     expect(shape.rotateLeft().toString()).to.equalShape(
       `Z...
        ZZ..
@@ -296,7 +296,7 @@ describe("Z shape", () => {
     );
   })
 
-  test.skip("Has 4 orientations", () => {
+  test("Has 2 orientations", () => {
     expect(distinctOrientations(shape).size).to.equal(2);
   })
 })

@@ -192,6 +192,9 @@ export class Tetromino {
         if (this.shapeType === SHAPE_TYPES.L) {
             return this.rotateL(-1)
         }
+        if (this.shapeType === SHAPE_TYPES.Z) {
+            return this.rotateZ()
+        }
         let a = JSON.parse(JSON.stringify(this.shapeMatrix))
         for (let i = 0; i < parseInt(this.height / 2); i++) {
             for (let j = i; j < this.height - i - 1; j++) {
