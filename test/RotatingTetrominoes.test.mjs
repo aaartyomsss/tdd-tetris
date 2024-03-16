@@ -233,4 +233,8 @@ describe("L shape", () => {
        ....`
     );
   })
+
+  test("Has 4 orientations", () => {
+    expect(distinctOrientations(shape).size).to.equal(4);
+  })
 })
