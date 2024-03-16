@@ -216,6 +216,7 @@ export class Board {
       this.fallingElementTopLeftIndex = [col, row + 1];
     } else {
       this.moveTetromino();
+      this.clearLine(this.height - 1)
     }
   }
 
@@ -267,10 +268,16 @@ export class Board {
     this.tick();
   }
 
-  checkForLineClear() {
+  clearLine(row) {
+    if (this.checkForLineClear(row)) {
+      this.boardMatrix[row] = '.'.repeat(this.width).split('')
+    }
+  }
+
+  checkForLineClear(row) {
     let rowFilled = true
     for (let i = 0; i < this.width; i++) {
-      if (this.boardMatrix[this.height - 1][i] === '.') {
+      if (this.boardMatrix[row][i] === '.') {
         rowFilled = false
       }
     }
