@@ -267,6 +267,16 @@ export class Board {
     this.tick();
   }
 
+  checkForLineClear() {
+    const rowFilled = true
+    for (let i = 0; i < this.width; i++) {
+      if (this.boardMatrix[this.height - 1][i] === '.') {
+        rowFilled = false
+      }
+    }
+    return rowFilled
+  }
+
   toString() {
     let result = "";
     for (let i = 0; i < this.boardMatrix.length; i++) {
