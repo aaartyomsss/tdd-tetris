@@ -137,10 +137,12 @@ export class Tetromino {
     }
 
     rotateZ() {
-        return new Tetromino(`Z...
-                              ZZ..
-                              .Z..
-                              ....`, SHAPE_TYPES.Z)
+        if (this.shapeMatrix[0][0] === '.') {
+            return new Tetromino(`Z...
+                                  ZZ..
+                                  .Z..
+                                  ....`, SHAPE_TYPES.Z)
+        }
     }
 
     rotateRight() {
