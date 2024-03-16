@@ -2,7 +2,8 @@ const SHAPE_TYPES = {
     T: 'T',
     I: 'I',
     O: 'O',
-    L: 'L'
+    L: 'L',
+    Z: 'Z'
 }
 
 export class Tetromino {
@@ -35,6 +36,13 @@ export class Tetromino {
                               LLL.
                               L...
                               ....`, SHAPE_TYPES.L)
+    }
+
+    static get Z_SHAPE() {
+        return new Tetromino(`....
+                              .ZZ.
+                              ZZ..
+                              ....`, SHAPE_TYPES.Z)
     }
 
     constructor(shape, shapeType, currentOriantation = 0) {

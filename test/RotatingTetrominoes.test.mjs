@@ -238,3 +238,65 @@ describe("L shape", () => {
     expect(distinctOrientations(shape).size).to.equal(4);
   })
 })
+
+describe("Z shape", () => {
+  const shape = Tetromino.Z_SHAPE;
+
+  test("initial orientation", () => {
+    expect(shape.toString()).to.equalShape(
+      `....
+       .ZZ.
+       ZZ..
+       ....`
+    );
+  });
+
+  test.skip("Rotate right", () => {
+    expect(shape.rotateRight().toString()).to.equalShape(
+      `Z...
+       ZZ..
+       .Z..
+       ....`
+    );
+  })
+
+  test.skip("Rotate right 2", () => {
+    expect(shape.rotateRight().rotateRight().toString()).to.equalShape(
+      `....
+       .ZZ.
+       ZZ..
+       ....`
+    );
+  })
+
+  test.skip("Rotate right 3", () => {
+    expect(shape.rotateRight().rotateRight().rotateRight().toString()).to.equalShape(
+      `Z...
+       ZZ..
+       .Z..
+       ....`
+    );
+  })
+
+  test.skip("Rotate right full", () => {
+    expect(shape.rotateRight().rotateRight().rotateRight().rotateRight().toString()).to.equalShape(
+      `....
+      .ZZ.
+      ZZ..
+      ....`
+    );
+  })
+
+  test.skip("Rotate left", () => {
+    expect(shape.rotateLeft().toString()).to.equalShape(
+      `Z...
+       ZZ..
+       .Z..
+       ....`
+    );
+  })
+
+  test.skip("Has 4 orientations", () => {
+    expect(distinctOrientations(shape).size).to.equal(2);
+  })
+})
