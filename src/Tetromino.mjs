@@ -105,10 +105,12 @@ export class Tetromino {
 
     rotateL(direction) {
         let toDirection = this.handleRotationDirection(direction)
-        return new Tetromino(`LL..
-                              .L..
-                              .L..
-                              ....`, SHAPE_TYPES.L)
+        if (toDirection === 1) {
+            return new Tetromino(`LL..
+                                 .L..
+                                 .L..
+                                 ....`, SHAPE_TYPES.L)
+        }
     }
 
     rotateRight() {
