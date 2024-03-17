@@ -57,8 +57,6 @@ describe("Clearing Lines", () => {
         board.moveRight()
         tickTick(board, 6)
 
-        console.log(board.toString())
-
         expect(board.toString()).to.equalShape(
         `....
          ....

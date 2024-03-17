@@ -20,10 +20,7 @@ describe("Falling rotating tetrominoes only T shape", () => {
   test("Tetromino can be rotated on the board", () => {
     board.drop(Tetromino.T_SHAPE);
     board.tick()
-    console.log("Tick ? ? ? ")
-    console.log(board.toString())
     board.rotateRight()
-    console.log(board.toString(), " No 2")
 
     expect(board.toString()).to.equalShape(
       `....T.....
@@ -490,17 +487,12 @@ describe("Random stuff found during further development", () => {
     board = new Board(10, 7);
   });
 
-  test.skip("T can be rotated twice and pushed left", () => {
+  test("T can be rotated twice and pushed left", () => {
     board.drop(Tetromino.T_SHAPE)
     board.tick()
-    console.log(board.toString(), board.fallingElementTopLeftIndex)
     board.rotateLeft()
-    console.log(board.toString(), board.fallingElementTopLeftIndex)
     board.rotateLeft()
-    console.log(board.toString(), board.fallingElementTopLeftIndex)
     board.moveLeft()
-
-    console.log(board.toString(), board.fallingElementTopLeftIndex)
 
     expect(board.toString()).to.equalShape(
       `..........

@@ -49,7 +49,7 @@ describe("Some board specific functions", () => {
     ]);
   });
 
-  test.skip("Returns aux array when T is rotated twice", () => {
+  test("Returns aux array when T is rotated twice", () => {
     const board = new Board(10, 6);
     board.drop(Tetromino.T_SHAPE);
     board.tick()
