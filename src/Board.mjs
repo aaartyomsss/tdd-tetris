@@ -283,11 +283,15 @@ export class Board {
   }
 
   clearingLinesAlgo() {
+    let hasBeenCleared = false
     for (let row = this.height - 1; row > 0; row--) {
-      const hasBeenCleared = this.clearLine(row);
-      if (hasBeenCleared) {
-
+      const _hasBeenCleared = this.clearLine(row);
+      if (_hasBeenCleared) {
+        hasBeenCleared = true
       }
+    }
+    if (hasBeenCleared) {
+      this.clearingLinesPushItemsDown(this.height - 1)
     }
   }
 
@@ -295,6 +299,7 @@ export class Board {
     for (let col = 0; col < this.width - 1; col++) {
       if (this.boardMatrix[clearedRow][col] === '.' && this.boardMatrix[clearedRow - 1][col] !== '.') {
         this.boardMatrix[clearedRow][col] = this.boardMatrix[clearedRow - 1][col]
+        this.boardMatrix[clearedRow - 1][col] = '.'
       }
     } 
   }

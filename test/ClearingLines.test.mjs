@@ -103,7 +103,7 @@ describe("Clearing Lines", () => {
         );
     })
 
-    test.skip("After clearing lines, top row is moved down", () => {
+    test("After clearing lines, top row is moved down", () => {
         const board = new Board(6, 6)
         board.drop(Tetromino.T_SHAPE)
         board.tick()
