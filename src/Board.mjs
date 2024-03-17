@@ -73,24 +73,24 @@ export class Board {
     }
     const auxBoard = this.createAuxBoardWithoutCurrentlyFallingElement();
 
-    if (row - this.fallingElement.freeRowsFromTop() < 0) return false;
+    if (row - this.freeTopSpaceDeducation() < 0) return false;
     for (let i = this.fallingElement.height - 1 - maybeNewElement.freeRowsFromBottom(); i >= 0; i--) {
       for (let j = this.fallingElement.width - 1 - maybeNewElement.freeColsFromRight(); j >= 0; j--) {
-        if (row - this.fallingElement.freeRowsFromTop() + i >= this.height || startingCol + j >= this.width) {
+        if (row - this.freeTopSpaceDeducation() + i >= this.height || startingCol + j >= this.width) {
           return false;
         }
         if (
           maybeNewElement.shapeMatrix[i][j] !== "." &&
-          auxBoard[row - this.fallingElement.freeRowsFromTop() + i][startingCol + j] !== "."
+          auxBoard[row - this.freeTopSpaceDeducation() + i][startingCol + j] !== "."
         ) {
           return false;
         }
       }
     }
-    if (maybeNewElement.freeRowsFromTop() > this.fallingElement.freeRowsFromTop()) {
+    if (maybeNewElement.freeRowsFromTop() > this.freeTopSpaceDeducation()) {
       this.fallingElementTopLeftIndex = [startingCol, row + maybeNewElement.freeRowsFromTop() - 1];
-    } else if (maybeNewElement.freeRowsFromTop() < this.fallingElement.freeRowsFromTop()) {
-      this.fallingElementTopLeftIndex = [startingCol, row - this.fallingElement.freeRowsFromTop()];
+    } else if (maybeNewElement.freeRowsFromTop() < this.freeTopSpaceDeducation()) {
+      this.fallingElementTopLeftIndex = [startingCol, row - this.freeTopSpaceDeducation()];
     }
     this.boardMatrix = auxBoard;
     return true;
