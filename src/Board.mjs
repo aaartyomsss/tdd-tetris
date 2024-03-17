@@ -286,16 +286,15 @@ export class Board {
     for (let row = this.height - 1; row > 0; row--) {
       const hasBeenCleared = this.clearLine(row);
       if (hasBeenCleared) {
-        
+
       }
     }
   }
 
-  clearingLinesPushItemsDown() {
-    const lastRow = this.height - 1
+  clearingLinesPushItemsDown(clearedRow) {
     for (let col = 0; col < this.width - 1; col++) {
-      if (this.boardMatrix[lastRow][col] === '.' && this.boardMatrix[lastRow - 1][col] !== '.') {
-        this.boardMatrix[lastRow][col] = this.boardMatrix[lastRow - 1][col]
+      if (this.boardMatrix[clearedRow][col] === '.' && this.boardMatrix[clearedRow - 1][col] !== '.') {
+        this.boardMatrix[clearedRow][col] = this.boardMatrix[clearedRow - 1][col]
       }
     } 
   }
