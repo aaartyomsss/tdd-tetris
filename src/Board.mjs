@@ -18,6 +18,10 @@ export class Board {
     return !!this.fallingElement;
   }
 
+  freeTopSpaceDeducation() {
+    return this.fallingElement.freeRowsFromTop()
+  }
+
   drop(element) {
     if (this.fallingElement) {
       throw new Error("already falling");
@@ -29,8 +33,8 @@ export class Board {
       this.fallingElementTopLeftIndex = [startingPosition, 0];
       for (let i = 0; i < element.height - this.fallingElement.freeRowsFromBottom(); i++) {
         for (let j = element.freeColsFromLeft(); j < element.width - element.freeColsFromRight(); j++) {
-          if (i - this.fallingElement.freeRowsFromTop() >= 0) {
-            this.boardMatrix[i - this.fallingElement.freeRowsFromTop()][startingPosition + j] =
+          if (i - this.freeTopSpaceDeducation() >= 0) {
+            this.boardMatrix[i - this.freeTopSpaceDeducation()][startingPosition + j] =
               element.shapeMatrix[i][j];
           }
         }
@@ -84,7 +88,10 @@ export class Board {
         }
       }
     }
-    this.fallingElementTopLeftIndex = [startingCol, row - this.fallingElement.freeRowsFromTop()];
+    if (maybeNewElement.freeRowsFromTop() > this.fallingElement.freeRowsFromTop()) {
+      this.fallingElementTopLeftIndex = [startingCol, row + maybeNewElement.freeRowsFromTop() - 1];
+    } else if (maybeNewElement.freeRowsFromTop() < this.fallingElement.freeRowsFromTop()) {
+      this.fallingElementTopLeftIndex = [startingCol, row - this.fallingElement.freeRowsFromTop()];}
     this.boardMatrix = auxBoard;
     return true;
   }

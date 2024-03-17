@@ -480,3 +480,33 @@ describe("Wall bounce is implemented", () => {
     );
   })
 })
+
+describe("Random stuff found during further development", () => {
+  let board;
+  beforeEach(() => {
+    board = new Board(10, 7);
+  });
+
+  test.skip("T can be rotated twice and pushed left", () => {
+    board.drop(Tetromino.T_SHAPE)
+    board.tick()
+    console.log(board.toString(), board.fallingElementTopLeftIndex)
+    board.rotateLeft()
+    console.log(board.toString(), board.fallingElementTopLeftIndex)
+    board.rotateLeft()
+    console.log(board.toString(), board.fallingElementTopLeftIndex)
+    board.moveLeft()
+
+    console.log(board.toString(), board.fallingElementTopLeftIndex)
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ...T......
+       ..TTT.....
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  })
+})
