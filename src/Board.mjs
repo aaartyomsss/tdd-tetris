@@ -20,6 +20,7 @@ export class Board {
   }
 
   freeTopSpaceDeducation() {
+    if (!this.fallingElementTopRowDeduction) return 0
     return this.fallingElement.freeRowsFromTop();
   }
 
@@ -90,7 +91,7 @@ export class Board {
         }
       }
     }
-    this.fallingElementTopLeftIndex = [startingCol, row - this.fallingElement.freeRowsFromTop()];
+    this.fallingElementTopLeftIndex = [startingCol, row];
     this.boardMatrix = auxBoard;
     return true;
   }
@@ -207,7 +208,12 @@ export class Board {
     }
     this.#moveTetromino(startingRow, col);
     // TODO: When moving logic should change, but also moving should be responsible for no deduction!!!!!!!!! aka set to 0
-    this.fallingElementTopLeftIndex = [col, row + 1];
+    if (row - this.freeTopSpaceDeducation() + 1 === 0) {
+      this.fallingElementTopRowDeduction = false
+      this.fallingElementTopLeftIndex = [col, 0];
+    } else {
+      this.fallingElementTopLeftIndex = [col, row + 1];
+    }
   }
 
   tick() {
