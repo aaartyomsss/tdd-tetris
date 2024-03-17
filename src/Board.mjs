@@ -284,7 +284,10 @@ export class Board {
 
   clearingLinesAlgo() {
     for (let row = this.height - 1; row > 0; row--) {
-      this.clearLine(row);
+      const hasBeenCleared = this.clearLine(row);
+      if (hasBeenCleared) {
+        
+      }
     }
   }
 
