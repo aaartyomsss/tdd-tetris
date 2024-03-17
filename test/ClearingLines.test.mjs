@@ -103,5 +103,37 @@ describe("Clearing Lines", () => {
         );
     })
 
+    test.skip("After clearing lines, top row is moved down", () => {
+        const board = new Board(6, 6)
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.rotateLeft()
+        board.rotateLeft()
+        board.moveLeft()
+        board.moveLeft()
+        board.moveLeft()
+        tickTick(board, 6)
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.rotateLeft()
+        board.rotateLeft()
+        board.moveRight()
+        board.moveRight()
+        board.moveRight()
+        tickTick(board, 6)
+
+        expect(board.toString()).to.equalShape(
+            `......
+             ......
+             ......
+             ......
+             ......
+             .T..T.`
+            );
+
+
+
+    })
+
     
 })

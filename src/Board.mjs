@@ -288,6 +288,15 @@ export class Board {
     }
   }
 
+  clearingLinesPushItemsDown() {
+    const lastRow = this.height - 1
+    for (let col = 0; col < this.width - 1; col++) {
+      if (this.boardMatrix[lastRow][col] === '.' && this.boardMatrix[lastRow - 1][col] !== '.') {
+        this.boardMatrix[lastRow][col] = this.boardMatrix[lastRow - 1][col]
+      }
+    } 
+  }
+
   clearLine(row) {
     if (this.checkForLineClear(row)) {
       this.boardMatrix[row] = ".".repeat(this.width).split("");
