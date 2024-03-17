@@ -4,6 +4,7 @@ export class Board {
   boardMatrix = [];
   fallingElement;
   fallingElementTopLeftIndex;
+  fallingElementTopRowDeduction;
 
   constructor(width, height) {
     this.width = width;
@@ -27,6 +28,8 @@ export class Board {
       throw new Error("already falling");
     }
     this.fallingElement = element;
+    // According to arika all of them have top row as free ....
+    this.fallingElementTopRowDeduction = true
     if (element.width && element.height) {
       const startingPosition = Math.floor((this.width - element.width) / 2);
 
@@ -203,6 +206,7 @@ export class Board {
       return;
     }
     this.#moveTetromino(startingRow, col);
+    // TODO: When moving logic should change, but also moving should be responsible for no deduction!!!!!!!!! aka set to 0
     this.fallingElementTopLeftIndex = [col, row + 1];
   }
 

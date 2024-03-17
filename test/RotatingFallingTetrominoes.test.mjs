@@ -20,7 +20,10 @@ describe("Falling rotating tetrominoes only T shape", () => {
   test("Tetromino can be rotated on the board", () => {
     board.drop(Tetromino.T_SHAPE);
     board.tick()
+    console.log("Tick ? ? ? ")
+    console.log(board.toString())
     board.rotateRight()
+    console.log(board.toString(), " No 2")
 
     expect(board.toString()).to.equalShape(
       `....T.....

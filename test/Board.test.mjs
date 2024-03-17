@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, beforeEach } from "vitest";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
@@ -68,3 +68,17 @@ describe("Some board specific functions", () => {
     ]);
   });
 });
+
+describe("Board keeps track of falling element top empty row deduction", () => {
+  let board
+  beforeEach(() => {
+    board = new Board(10, 6)
+  })
+
+  test("T initially has fallingElementTopLevel deduction", () => {
+    board.drop(Tetromino.T_SHAPE)
+
+
+    expect(board.fallingElementTopRowDeduction).toBe(true)
+  })
+})

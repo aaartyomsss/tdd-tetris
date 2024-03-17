@@ -139,9 +139,17 @@ describe("Falling tetrominoes", () => {
   test("it cannot be moved down beyond the board (will stop falling)", () => {
     board.drop(Tetromino.T_SHAPE);
     board.moveDown()
+    console.log(" What the hell ?> ? ?? ")
+    console.log(board.toString(), board.fallingElementTopLeftIndex)
     board.moveDown()
+    console.log(" What the hell ?> ? ?? ")
+    console.log(board.toString(), board.fallingElementTopLeftIndex)
     board.moveDown()
+    console.log(" What the hell ?> ? ?? ")
+    console.log(board.toString(), board.fallingElementTopLeftIndex)
     board.moveDown()
+    console.log(" What the hell ?> ? ?? ")
+    console.log(board.toString(), board.fallingElementTopLeftIndex)
     board.moveDown()
     board.moveDown()
     board.moveDown()
@@ -151,6 +159,8 @@ describe("Falling tetrominoes", () => {
     board.moveDown()
     board.moveDown()
 
+    console.log(" What the hell ?> ? ?? ")
+    console.log(board.toString())
 
     expect(board.toString()).to.equalShape(
       `..........
