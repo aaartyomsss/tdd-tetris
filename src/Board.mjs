@@ -19,7 +19,7 @@ export class Board {
   }
 
   freeTopSpaceDeducation() {
-    return this.fallingElement.freeRowsFromTop()
+    return this.fallingElement.freeRowsFromTop();
   }
 
   drop(element) {
@@ -34,8 +34,7 @@ export class Board {
       for (let i = 0; i < element.height - this.fallingElement.freeRowsFromBottom(); i++) {
         for (let j = element.freeColsFromLeft(); j < element.width - element.freeColsFromRight(); j++) {
           if (i - this.freeTopSpaceDeducation() >= 0) {
-            this.boardMatrix[i - this.freeTopSpaceDeducation()][startingPosition + j] =
-              element.shapeMatrix[i][j];
+            this.boardMatrix[i - this.freeTopSpaceDeducation()][startingPosition + j] = element.shapeMatrix[i][j];
           }
         }
       }
@@ -91,7 +90,8 @@ export class Board {
     if (maybeNewElement.freeRowsFromTop() > this.fallingElement.freeRowsFromTop()) {
       this.fallingElementTopLeftIndex = [startingCol, row + maybeNewElement.freeRowsFromTop() - 1];
     } else if (maybeNewElement.freeRowsFromTop() < this.fallingElement.freeRowsFromTop()) {
-      this.fallingElementTopLeftIndex = [startingCol, row - this.fallingElement.freeRowsFromTop()];}
+      this.fallingElementTopLeftIndex = [startingCol, row - this.fallingElement.freeRowsFromTop()];
+    }
     this.boardMatrix = auxBoard;
     return true;
   }
@@ -201,7 +201,7 @@ export class Board {
       !this.#checkMoveTetromino(startingRow, col) ||
       startingRow + this.fallingElement.height - this.fallingElement.freeRowsFromBottom() === this.height
     ) {
-      this.clearingLinesAlgo()
+      this.clearingLinesAlgo();
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
       return;
@@ -214,7 +214,7 @@ export class Board {
     if (!this.fallingElementTopLeftIndex) return;
     const [col, row] = this.fallingElementTopLeftIndex;
     if (row + 1 === this.height || (this.boardMatrix[row + 1][col] !== "." && !this.fallingElement.width)) {
-      this.clearingLinesAlgo()
+      this.clearingLinesAlgo();
       this.fallingElement = undefined;
       this.fallingElementTopLeftIndex = undefined;
       return;
@@ -278,24 +278,24 @@ export class Board {
 
   clearingLinesAlgo() {
     for (let row = this.height - 1; row > 0; row--) {
-      this.clearLine(row)
+      this.clearLine(row);
     }
   }
 
   clearLine(row) {
     if (this.checkForLineClear(row)) {
-      this.boardMatrix[row] = '.'.repeat(this.width).split('')
+      this.boardMatrix[row] = ".".repeat(this.width).split("");
     }
   }
 
   checkForLineClear(row) {
-    let rowFilled = true
+    let rowFilled = true;
     for (let i = 0; i < this.width; i++) {
-      if (this.boardMatrix[row][i] === '.') {
-        rowFilled = false
+      if (this.boardMatrix[row][i] === ".") {
+        rowFilled = false;
       }
     }
-    return rowFilled
+    return rowFilled;
   }
 
   toString() {
