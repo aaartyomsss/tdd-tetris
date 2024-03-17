@@ -140,13 +140,13 @@ export class Board {
     if (colDirection === 1) {
       return this.isHeightFree(
         col + this.fallingElement.width - this.fallingElement.freeColsFromRight(),
-        row - this.freeTopSpaceDeducation(),
+        row - this.fallingElement.freeRowsFromTop(),
         elementHeightWithoutBottomDots
       );
     } else if (colDirection === -1) {
       return this.isHeightFree(
         col + this.fallingElement.freeColsFromLeft() - 1,
-        row - this.freeTopSpaceDeducation(),
+        row - this.fallingElement.freeRowsFromTop(),
         elementHeightWithoutBottomDots
       );
     }
