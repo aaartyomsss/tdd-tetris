@@ -300,7 +300,9 @@ export class Board {
   clearLine(row) {
     if (this.checkForLineClear(row)) {
       this.boardMatrix[row] = ".".repeat(this.width).split("");
+      return true
     }
+    return false
   }
 
   checkForLineClear(row) {
