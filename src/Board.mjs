@@ -87,11 +87,7 @@ export class Board {
         }
       }
     }
-    if (maybeNewElement.freeRowsFromTop() > this.freeTopSpaceDeducation()) {
-      this.fallingElementTopLeftIndex = [startingCol, row + maybeNewElement.freeRowsFromTop() - 1];
-    } else if (maybeNewElement.freeRowsFromTop() < this.freeTopSpaceDeducation()) {
-      this.fallingElementTopLeftIndex = [startingCol, row - this.freeTopSpaceDeducation()];
-    }
+    this.fallingElementTopLeftIndex = [startingCol, row - this.fallingElement.freeRowsFromTop()];
     this.boardMatrix = auxBoard;
     return true;
   }
