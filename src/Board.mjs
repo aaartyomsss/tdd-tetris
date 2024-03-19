@@ -284,10 +284,14 @@ export class Board {
 
   clearingLinesAlgo() {
     let hasBeenCleared = false
+    let startOfLineClear
+    let amountClearedLines = 0
     for (let row = this.height - 1; row > 0; row--) {
       const _hasBeenCleared = this.clearLine(row);
       if (_hasBeenCleared) {
         hasBeenCleared = true
+        startOfLineClear = Math.max(row, startOfLineClear)
+        amountClearedLines++
       }
     }
     if (hasBeenCleared) {
