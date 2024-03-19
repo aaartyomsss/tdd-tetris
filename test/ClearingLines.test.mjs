@@ -122,6 +122,8 @@ describe("Clearing Lines", () => {
         board.moveRight()
         tickTick(board, 6)
 
+        console.log(board.toString())
+
         expect(board.toString()).to.equalShape(
             `......
              ......
@@ -177,13 +179,19 @@ describe("Clearing Lines", () => {
         board.tick()
 
         board.drop(Tetromino.I_SHAPE)
+        console.log(board.toString())
         board.tick()
+        console.log(board.toString(), "tick")
         board.moveRight()
-        
+        console.log(board.toString(), "right")
+
         board.rotateLeft()
+        console.log(board.toString(), "rotate")
         board.tick()
         board.tick()
         board.tick()
+
+        console.log(board.toString())
 
         expect(board.toString()).to.equalShape(
             `.......

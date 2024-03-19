@@ -284,7 +284,7 @@ export class Board {
 
   clearingLinesAlgo() {
     let hasBeenCleared = false
-    let startOfLineClear
+    let startOfLineClear = this.height
     let amountClearedLines = 0
     for (let row = this.height - 1; row > 0; row--) {
       const _hasBeenCleared = this.clearLine(row);
@@ -295,15 +295,17 @@ export class Board {
       }
     }
     if (hasBeenCleared) {
-      this.clearingLinesPushItemsDown(this.height - 1)
+      for (let row = 0; row < startOfLineClear - amountClearedLines; row++) {
+        this.clearingLinesPushItemsDown(row + amountClearedLines, row)
+      }
     }
   }
 
-  clearingLinesPushItemsDown(clearedRow) {
-    for (let col = 0; col < this.width - 1; col++) {
-      if (this.boardMatrix[clearedRow][col] === '.' && this.boardMatrix[clearedRow - 1][col] !== '.') {
-        this.boardMatrix[clearedRow][col] = this.boardMatrix[clearedRow - 1][col]
-        this.boardMatrix[clearedRow - 1][col] = '.'
+  clearingLinesPushItemsDown(moveTo, moveFrom) {
+    for (let col = 0; col < this.width ; col++) {
+      if (this.boardMatrix[moveTo][col] === '.' && this.boardMatrix[moveFrom][col] !== '.') {
+        this.boardMatrix[moveTo][col] = this.boardMatrix[moveFrom][col]
+        this.boardMatrix[moveFrom][col] = '.'
       }
     } 
   }
