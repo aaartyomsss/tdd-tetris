@@ -504,4 +504,28 @@ describe("Random stuff found during further development", () => {
        ..........`
     );
   })
+
+  test("Horizantal I should bump into vertical I", () => {
+    board.drop(Tetromino.I_SHAPE)
+    board.tick()
+    board.rotateLeft()
+    board.moveRight()
+    board.moveRight()
+    fallToBottom(board)
+    board.drop(Tetromino.I_SHAPE)
+    board.tick()
+    board.tick()
+    board.tick()
+    board.moveRight()
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ...IIIII..
+       .......I..
+       .......I..
+       .......I..`
+    );
+  })
 })

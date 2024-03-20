@@ -128,7 +128,7 @@ export class Board {
   }
 
   isHeightFree(col, colStart, height) {
-    for (let i = colStart; i <= colStart + height - 1; i++) {
+    for (let i = colStart; i <= colStart + height; i++) {
       if (i > 0 && this.boardMatrix[i][col] !== ".") return false;
     }
     return true;
