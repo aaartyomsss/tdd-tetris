@@ -128,7 +128,13 @@ export class Board {
   }
 
   isHeightFree(col, colStart, height) {
-    for (let i = colStart; i <= colStart + height; i++) {
+    const elementAbsoluteHeight = this.fallingElement.height - this.fallingElement.freeRowsFromTop() - this.fallingElement.freeRowsFromBottom()
+    // Horizontal I edge case
+    if (elementAbsoluteHeight === 1) {
+      return this.boardMatrix[colStart + (this.fallingElement.freeRowsFromTop() * 2)][col] === '.'
+    }
+    
+    for (let i = colStart; i < colStart + height; i++) {
       if (i > 0 && this.boardMatrix[i][col] !== ".") return false;
     }
     return true;

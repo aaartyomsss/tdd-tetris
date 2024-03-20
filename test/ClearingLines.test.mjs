@@ -196,5 +196,60 @@ describe("Clearing Lines", () => {
             );
     })
 
+    test("All rows are moved down by the amount of cleared lines (by 3)", () => {
+        const board = new Board(5, 11)
+        
+        board.drop(Tetromino.Z_SHAPE)
+        board.moveRight()
+        board.moveRight()
+        tickTick(board, 12)
+
+        board.drop(Tetromino.Z_SHAPE)
+        board.moveLeft()
+        tickTick(board, 12)
+
+        board.drop(Tetromino.O_SHAPE)
+        board.moveRight()
+        board.moveRight()
+        board.moveRight()
+        tickTick(board, 12)
+
+        board.drop(Tetromino.O_SHAPE)
+        tickTick(board, 12)
+
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.rotateLeft()
+        board.rotateLeft()
+        board.moveRight()
+        tickTick(board, 11)
+
+        board.drop(Tetromino.I_SHAPE)
+        board.moveRight()
+        tickTick(board, 12)
+
+        board.drop(Tetromino.I_SHAPE)
+        board.tick()
+        board.rotateLeft()
+        board.moveLeft()
+        board.moveLeft()
+
+        tickTick(board, 12)
+
+        expect(board.toString()).to.equalShape(
+            `.....
+             .....
+             .....
+             .....
+             .....
+             .....
+             .....
+             .IIII
+             ..T..
+             ITTT.
+             ZZZZ.`
+            );
+    })
+
     
 })
