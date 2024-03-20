@@ -505,7 +505,7 @@ describe("Random stuff found during further development", () => {
     );
   })
 
-  test("Horizantal I should bump into vertical I", () => {
+  test("Horizontal I should bump into vertical I", () => {
     board.drop(Tetromino.I_SHAPE)
     board.tick()
     board.rotateLeft()

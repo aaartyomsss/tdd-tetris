@@ -207,7 +207,6 @@ export class Board {
       return;
     }
     this.#moveTetromino(startingRow, col);
-    // TODO: When moving logic should change, but also moving should be responsible for no deduction!!!!!!!!! aka set to 0
     if (row - this.freeTopSpaceDeducation() + 1 === 0) {
       this.fallingElementTopRowDeduction = false
       this.fallingElementTopLeftIndex = [col, 0];
@@ -295,7 +294,7 @@ export class Board {
       }
     }
     if (hasBeenCleared) {
-      for (let row = 0; row < startOfLineClear - amountClearedLines; row++) {
+      for (let row = startOfLineClear - amountClearedLines - 1; row > 0; row--) {
         this.clearingLinesPushItemsDown(row + amountClearedLines, row)
       }
     }

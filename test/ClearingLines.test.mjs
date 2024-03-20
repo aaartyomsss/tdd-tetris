@@ -134,16 +134,13 @@ describe("Clearing Lines", () => {
             );
     })
 
-    test.skip("All rows are moved down by the amount of cleared lines", () => {
+    test("All rows are moved down by the amount of cleared lines (by 1)", () => {
         const board = new Board(7, 7)
         
         board.drop(Tetromino.O_SHAPE)
         board.moveLeft()
         board.moveLeft()
         board.moveLeft()
-        tickTick(board, 7)
-        
-        board.drop(Tetromino.O_SHAPE)
         tickTick(board, 7)
 
         board.drop(Tetromino.Z_SHAPE)
@@ -157,49 +154,44 @@ describe("Clearing Lines", () => {
         board.moveLeft()
         board.moveLeft()
         tickTick(board, 7)
-        
+
+        board.drop(Tetromino.I_SHAPE)
+        board.tick()
+        board.moveRight()
+        board.rotateLeft()
+        board.moveRight()
+        board.moveRight()
+        board.tick()
+        board.tick()
+
+        board.drop(Tetromino.I_SHAPE)
+        board.tick()
+        board.moveRight()
+        board.rotateLeft()
+        board.moveRight()
+        board.tick()
+        board.tick()
+
+        board.drop(Tetromino.I_SHAPE)
+        board.tick()
+
+        board.rotateLeft()
+        board.moveRight()
+        board.tick()
+        board.tick()
+        board.tick()
+
         board.drop(Tetromino.O_SHAPE)
         tickTick(board, 7)
 
-        board.drop(Tetromino.I_SHAPE)
-        board.tick()
-        board.moveRight()
-        board.rotateLeft()
-        board.moveRight()
-        board.moveRight()
-        board.tick()
-        board.tick()
-
-        board.drop(Tetromino.I_SHAPE)
-        board.tick()
-        board.moveRight()
-        board.rotateLeft()
-        board.moveRight()
-        board.tick()
-        board.tick()
-
-        board.drop(Tetromino.I_SHAPE)
-        console.log(board.toString())
-        board.tick()
-        console.log(board.toString(), "tick")
-        board.moveRight()
-        console.log(board.toString(), "right")
-
-        board.rotateLeft()
-        console.log(board.toString(), "rotate")
-        board.tick()
-        board.tick()
-        board.tick()
-
-        console.log(board.toString())
 
         expect(board.toString()).to.equalShape(
             `.......
              .......
-             .......
-             .......
              .....II
              ....III
+             OO..III
+             OO..III
              OOOOZZ.`
             );
     })
