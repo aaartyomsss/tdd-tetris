@@ -10,7 +10,7 @@ export class NintendoScoring {
 
     updateScore(rowsCleared) {
         if (rowsCleared === 1) {
-            this.score += 40
+            this.score += 40 * (this.level + 1)
         }
     }
 }

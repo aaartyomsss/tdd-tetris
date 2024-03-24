@@ -16,11 +16,25 @@ describe("NintendoScoring", () => {
         expect(scoringSystem.level).toEqual(3)
     })
 
-    test("NintendoScoring is capable of performing and update on 1 row removed", () => {
+    test("NintendoScoring is capable of performing an update on 1 row removed", () => {
         const scoringSystem = new NintendoScoring()
         expect(scoringSystem.score).toEqual(0)
         scoringSystem.updateScore(1)
         expect(scoringSystem.score).toEqual(40)
+    })
+
+    test("NintendoScoring is capable of performing an update on 1 row removed dependently on the level", () => {
+        const scoringSystemLevel2 = new NintendoScoring(1)
+        scoringSystemLevel2.updateScore(1)
+        expect(scoringSystemLevel2.score).toEqual(80)
+
+        const scoringSystemLevel3 = new NintendoScoring(2)
+        scoringSystemLevel3.updateScore(1)
+        expect(scoringSystemLevel3.score).toEqual(120)
+
+        const scoringSystemLevel9 = new NintendoScoring(9)
+        scoringSystemLevel9.updateScore(1)
+        expect(scoringSystemLevel9.score).toEqual(400)
     })
 
 })
