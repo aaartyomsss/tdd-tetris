@@ -5,6 +5,7 @@ export class Board {
   fallingElement;
   fallingElementTopLeftIndex;
   fallingElementTopRowDeduction;
+  scoringSystems = []
 
   constructor(width, height) {
     this.width = width;
@@ -13,6 +14,10 @@ export class Board {
       const row = ".".repeat(width).split("");
       this.boardMatrix.push(row);
     }
+  }
+
+  addScoringSystem(...args) {
+    this.scoringSystems = [...this.scoringSystems, ...args]
   }
 
   hasFalling() {

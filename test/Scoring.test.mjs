@@ -1,5 +1,6 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, beforeEach } from "vitest";
 import { NintendoScoring } from "../src/NintendoScoring.mjs";
+import { Board } from "../src/Board.mjs";
 
 describe("NintendoScoring", () => {
 
@@ -74,4 +75,30 @@ describe("NintendoScoring", () => {
         expect(scoringSystem.score).toEqual(4920)
     })
 
+})
+
+describe("Board as an observer pattern", () => {
+    let board
+
+    beforeEach(() => {
+        board = new Board(10, 6)
+    })
+
+    test("Board accepts scoring systems as subscribers", () => {
+        const scoringSystem1 = new NintendoScoring(1)
+        const scoringSystem2 = new NintendoScoring(2)
+        board.addScoringSystem(scoringSystem1, scoringSystem2)
+        
+        expect(board.scoringSystems.length).toEqual(2)
+    })
+
+    test.skip("Board sends scoring systems an update based on the amount of rows remove", () => {
+        const scoringSystem1 = new NintendoScoring(1)
+        const scoringSystem2 = new NintendoScoring(2)
+        board.addScoringSystem(scoringSystem1, scoringSystem2)
+        
+        board.updateScoringSystems(1)
+        expect(scoringSystem1.score).toEqual(80)
+        expect(scoringSystem2.score).toEqual(120)
+    })
 })
