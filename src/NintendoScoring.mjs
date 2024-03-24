@@ -16,6 +16,8 @@ export class NintendoScoring {
             baseLinePoints = 100
         } else if (rowsCleared === 3) {
             baseLinePoints = 300
+        } else if (rowsCleared === 4) {
+            baseLinePoints = 1200
         }
 
         this.score += baseLinePoints * (this.level + 1)

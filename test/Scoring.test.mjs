@@ -51,5 +51,27 @@ describe("NintendoScoring", () => {
         expect(scoringSystem.score).toEqual(300)
     })
 
+    test("NintendoScoring is capable of performing an update on 4 rows removed", () => {
+        const scoringSystem = new NintendoScoring()
+        expect(scoringSystem.score).toEqual(0)
+        scoringSystem.updateScore(4)
+        expect(scoringSystem.score).toEqual(1200)
+    })
+
+    test("NintendoScoring full system", () => {
+        const scoringSystem = new NintendoScoring(2)
+        expect(scoringSystem.score).toEqual(0)
+        scoringSystem.updateScore(2)
+        expect(scoringSystem.score).toEqual(300)
+
+        scoringSystem.updateScore(1)
+        expect(scoringSystem.score).toEqual(420)
+
+        scoringSystem.updateScore(3)
+        expect(scoringSystem.score).toEqual(1320)
+
+        scoringSystem.updateScore(4)
+        expect(scoringSystem.score).toEqual(4920)
+    })
 
 })
