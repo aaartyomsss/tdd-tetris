@@ -105,7 +105,7 @@ describe("Board as an observer pattern", () => {
 
 describe("'Integration' test on scoring systems", () => {
 
-    test("This is test 1", () => {
+    test("1 row cleared", () => {
         const matrixStub = [
             ['.', '.', '.', '.'],
             ['.', '.', '.', '.'],
@@ -125,6 +125,72 @@ describe("'Integration' test on scoring systems", () => {
             ....`
         )
         expect(scoringSystem1.score).toEqual(80)
+    })
+
+    test("2 row cleared", () => {
+        const matrixStub = [
+            ['.', '.', '.', '.'],
+            ['.', '.', '.', '.'],
+            ['T', 'T', 'T', 'T'],
+            ['T', 'T', 'T', 'T']
+        ]
+
+        const boardStub = new BoardStub(4, 4, matrixStub)
+        const scoringSystem1 = new NintendoScoring(1)
+        boardStub.addScoringSystem(scoringSystem1)
+        boardStub.clearingLinesAlgo()
+
+        expect(boardStub.toString()).to.equalShape(`
+            ....
+            ....
+            ....
+            ....`
+        )
+        expect(scoringSystem1.score).toEqual(200)
+    })
+
+    test("3 row cleared", () => {
+        const matrixStub = [
+            ['.', '.', '.', '.'],
+            ['T', 'T', 'T', 'T'],
+            ['T', 'T', 'T', 'T'],
+            ['T', 'T', 'T', 'T']
+        ]
+
+        const boardStub = new BoardStub(4, 4, matrixStub)
+        const scoringSystem1 = new NintendoScoring(1)
+        boardStub.addScoringSystem(scoringSystem1)
+        boardStub.clearingLinesAlgo()
+
+        expect(boardStub.toString()).to.equalShape(`
+            ....
+            ....
+            ....
+            ....`
+        )
+        expect(scoringSystem1.score).toEqual(600)
+    })
+
+    test("4 row cleared", () => {
+        const matrixStub = [
+            ['T', 'T', 'T', 'T'],
+            ['T', 'T', 'T', 'T'],
+            ['T', 'T', 'T', 'T'],
+            ['T', 'T', 'T', 'T']
+        ]
+
+        const boardStub = new BoardStub(4, 4, matrixStub)
+        const scoringSystem1 = new NintendoScoring(1)
+        boardStub.addScoringSystem(scoringSystem1)
+        boardStub.clearingLinesAlgo()
+
+        expect(boardStub.toString()).to.equalShape(`
+            ....
+            ....
+            ....
+            ....`
+        )
+        expect(scoringSystem1.score).toEqual(2400)
     })
 
 })

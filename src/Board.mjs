@@ -303,7 +303,7 @@ export class Board {
     let hasBeenCleared = false
     let startOfLineClear = this.height
     let amountClearedLines = 0
-    for (let row = this.height - 1; row > 0; row--) {
+    for (let row = this.height - 1; row >= 0; row--) {
       const _hasBeenCleared = this.clearLine(row);
       if (_hasBeenCleared) {
         hasBeenCleared = true
