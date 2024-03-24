@@ -102,3 +102,37 @@ describe("Board as an observer pattern", () => {
         expect(scoringSystem2.score).toEqual(120)
     })
 })
+
+describe("'Integration' test on scoring systems", () => {
+
+    test("This is test 1", () => {
+        const matrixStub = [
+            ['.', '.', '.', '.'],
+            ['.', '.', '.', '.'],
+            ['.', '.', '.', '.'],
+            ['T', 'T', 'T', 'T']
+        ]
+
+        const boardStub = new BoardStub(4, 4, matrixStub)
+        const scoringSystem1 = new NintendoScoring(1)
+        boardStub.addScoringSystem(scoringSystem1)
+        boardStub.clearingLinesAlgo()
+
+        expect(boardStub.toString()).to.equalShape(`
+            ....
+            ....
+            ....
+            ....`
+        )
+        expect(scoringSystem1.score).toEqual(80)
+    })
+
+})
+
+class BoardStub extends Board {
+
+    constructor(width, height, boardMatrix) {
+        super(width, height)
+        this.boardMatrix = boardMatrix
+    }
+}

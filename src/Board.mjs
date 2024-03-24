@@ -315,6 +315,7 @@ export class Board {
       for (let row = startOfLineClear - amountClearedLines - 1; row > 0; row--) {
         this.clearingLinesPushItemsDown(row + amountClearedLines, row)
       }
+      this.updateScoringSystems(amountClearedLines)
     }
   }
 
