@@ -92,7 +92,7 @@ describe("Board as an observer pattern", () => {
         expect(board.scoringSystems.length).toEqual(2)
     })
 
-    test.skip("Board sends scoring systems an update based on the amount of rows remove", () => {
+    test("Board sends scoring systems an update based on the amount of rows remove", () => {
         const scoringSystem1 = new NintendoScoring(1)
         const scoringSystem2 = new NintendoScoring(2)
         board.addScoringSystem(scoringSystem1, scoringSystem2)

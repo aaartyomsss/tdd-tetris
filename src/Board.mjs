@@ -20,6 +20,13 @@ export class Board {
     this.scoringSystems = [...this.scoringSystems, ...args]
   }
 
+  updateScoringSystems(rowsCleared) {
+    for (const scoringSystemI in this.scoringSystems) {
+      const system = this.scoringSystems[scoringSystemI]
+      system.updateScore(rowsCleared)
+    }
+  }
+
   hasFalling() {
     return !!this.fallingElement;
   }
