@@ -8,4 +8,14 @@ describe("ShuffleBag Class", () => {
         expect(bag.items).toStrictEqual([Tetromino.I_SHAPE, Tetromino.L_SHAPE, Tetromino.O_SHAPE])
         expect(bag.currentIndex).toEqual(2)
     })
+
+    test("It returns a random shape", () => {
+        const shapes = [Tetromino.I_SHAPE, Tetromino.L_SHAPE, Tetromino.O_SHAPE]
+
+        const bag = new ShuffleBag(shapes)
+        const tetromino = bag.next()
+
+        expect(shapes).toEqual(expect.arrayContaining([tetromino]))
+
+    })
 })

@@ -7,4 +7,8 @@ export class ShuffleBag {
         this.currentIndex = items.length - 1
     }
 
+    next() {
+        return this.items[0]
+    }
+
 }
