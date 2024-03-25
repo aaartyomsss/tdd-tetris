@@ -18,7 +18,7 @@ describe("ShuffleBag Class", () => {
         expect(shapes).toEqual(expect.arrayContaining([tetromino]))
     })
 
-    test.skip("It returns a random shape after 2 next calls", () => {
+    test("It returns a random shape after 2 next calls", () => {
         const shapes = [Tetromino.I_SHAPE, Tetromino.L_SHAPE, Tetromino.O_SHAPE]
 
         const bag = new ShuffleBag(shapes)

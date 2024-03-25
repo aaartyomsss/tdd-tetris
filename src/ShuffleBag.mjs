@@ -8,7 +8,12 @@ export class ShuffleBag {
     }
 
     next() {
-        return this.items[0]
+        const randomI = Math.floor(Math.random() * (this.currentIndex + 1))
+        const item = this.items[randomI]
+        this.items[randomI] = this.items[this.currentIndex]
+        this.items[this.currentIndex] = item
+        this.currentIndex--
+        return item
     }
 
 }
