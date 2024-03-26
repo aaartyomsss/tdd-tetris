@@ -1,5 +1,5 @@
 import { Board } from "./Board.mjs";
-import { ScoringSystem } from "./ScoringSystem.mjs";
+import {NintendoScoring} from './NintendoScoring.mjs'
 import { ShuffleBag } from "./ShuffleBag.mjs";
 import { Tetromino } from "./Tetromino.mjs";
 
@@ -14,18 +14,16 @@ function initGame() {
     tickDuration: 1000,
     nextTick: 0,
   };
-  game.scoring = new ScoringSystem();
+  game.scoring = new NintendoScoring();
   game.board = new Board(game.columns, game.rows);
-  game.board.onClearLine = (lineCount) => {
-    game.scoring.linesCleared(lineCount);
-  };
+  game.board.addScoringSystem(game.scoring)
   game.tetrominoes = new ShuffleBag([
     Tetromino.I_SHAPE,
     Tetromino.T_SHAPE,
     Tetromino.L_SHAPE,
-    Tetromino.J_SHAPE,
+    // Tetromino.J_SHAPE,
     Tetromino.T_SHAPE,
-    Tetromino.S_SHAPE,
+    // Tetromino.S_SHAPE,
     Tetromino.Z_SHAPE,
     Tetromino.O_SHAPE,
   ]);
@@ -111,7 +109,7 @@ function renderGame(game, canvas, timestamp) {
   drawBackground(ctx, canvasWidth, canvasHeight);
   for (let row = 0; row < game.rows; row++) {
     for (let column = 0; column < game.columns; column++) {
-      const cell = game.board.cellAt(row, column);
+      const cell = game.board.boardMatrix[row][column];
       drawCell(ctx, { cell, row, column, cellWidth, cellHeight });
     }
   }
