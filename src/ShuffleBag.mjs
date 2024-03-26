@@ -8,6 +8,11 @@ export class ShuffleBag {
     }
 
     next() {
+        if (this.currentIndex < 1) {
+            this.currentIndex = this.items.length - 1
+            return this.items[0]
+        }
+
         const randomI = Math.floor(Math.random() * (this.currentIndex + 1))
         const item = this.items[randomI]
         this.items[randomI] = this.items[this.currentIndex]
