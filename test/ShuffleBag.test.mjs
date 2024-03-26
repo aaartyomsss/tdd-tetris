@@ -53,4 +53,25 @@ describe("ShuffleBag Class", () => {
 
         expect(shapes).toEqual(expect.arrayContaining([tetromino4]))
     })
+
+    test("Even distribution after n rounds", () => {
+        const shapes = [Tetromino.I_SHAPE, Tetromino.L_SHAPE, Tetromino.O_SHAPE]
+
+        const counts = {
+            I: 0,
+            L: 0,
+            O: 0
+        }
+        const rounds = 10
+        const bag = new ShuffleBag(shapes)
+        for (let i = 0; i < rounds * 3; i++) {
+            const tetromino = bag.next()
+            counts[tetromino.shapeType] += 1 
+        }
+
+
+        expect(counts.I).toEqual(10)
+        expect(counts.L).toEqual(10)
+        expect(counts.O).toEqual(10)
+    })
 })
